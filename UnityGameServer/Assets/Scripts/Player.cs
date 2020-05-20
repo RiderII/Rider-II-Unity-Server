@@ -10,6 +10,9 @@ public class Player : MonoBehaviour
     public float gravity = -9.81f;
     public float jumpSpeed = 5f;
     public float moveSpeed = 5f;
+    public float collisions = 0;
+    public float traveled_kilometers = 0;
+    public float burned_calories = 0;
 
     private bool[] inputs;
     private float yVelocity = 0;
@@ -25,7 +28,7 @@ public class Player : MonoBehaviour
     {
         id = _id;
         username = _username;
-        transform.position += transform.right * (Vector2.zero.x + positionx) + transform.forward * Vector2.zero.y + transform.up * 1f;
+        transform.position += transform.right * (Vector2.zero.x + positionx - 1.0f) + transform.forward * Vector2.zero.y + transform.up * 1f;
         // position = _spwanPosition;
         // rotation = Quaternion.identity;
 
@@ -43,14 +46,14 @@ public class Player : MonoBehaviour
         {
             _inputDirection.y -= 1;
         }
-        if (inputs[2])
-        {
-            _inputDirection.x -= 1;
-        }
-        if (inputs[3])
-        {
-            _inputDirection.x += 1;
-        }
+        //if (inputs[2])
+        //{
+        //    _inputDirection.x -= 1;
+        //}
+        //if (inputs[3])
+        //{
+        //    _inputDirection.x += 1;
+        //}
 
         Move(_inputDirection);
     }
@@ -68,7 +71,7 @@ public class Player : MonoBehaviour
 
         _moveDirecion.y = yVelocity;
         controller.Move(_moveDirecion);
-
+        
         ServerSend.PlayerPosition(this);
         ServerSend.PlayerRotation(this); //client is authorative in rotation
     }
@@ -77,5 +80,10 @@ public class Player : MonoBehaviour
     {
         inputs = _inputs;
         transform.rotation = _rotation;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        ServerSend.PlayerCollided(this);
     }
 }

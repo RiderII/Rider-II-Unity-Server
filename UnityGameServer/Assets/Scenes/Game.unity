@@ -1693,7 +1693,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1343947189}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 40}
+  m_LocalPosition: {x: 0, y: 0, z: 110}
   m_LocalScale: {x: 10, y: 2, z: 0.1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2015,6 +2015,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 8282515381085317744, guid: b7c0c60311f18d84faa84a9ee7dc1bcc,
+    type: 3}
+  gameManager: {fileID: 5930781048178196454, guid: 6921f1a19578abd448051c8cbbb4969f,
     type: 3}
 --- !u!4 &1855288979
 Transform:

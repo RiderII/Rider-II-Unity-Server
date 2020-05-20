@@ -212,7 +212,7 @@ GameObject:
   - component: {fileID: 8361292499331906392}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -251,6 +251,9 @@ MonoBehaviour:
   gravity: -9.81
   jumpSpeed: 5
   moveSpeed: 5
+  collisions: 0
+  traveled_kilometers: 0
+  burned_calories: 0
 --- !u!143 &8361292499331906392
 CharacterController:
   m_ObjectHideFlags: 0

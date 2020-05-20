@@ -106,5 +106,28 @@ public class ServerSend
         }
     }
 
+    public static void PlayerDisconnected(int _playerId)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.playerDisconnected))
+        {
+            _packet.Write(_playerId);
+
+            SendTCPDataToAll(_packet);
+        }
+    }
+
+    public static void PlayerCollided(Player _player)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.playerCollided))
+        {
+            _packet.Write(_player.id);
+            _packet.Write(_player.collisions);
+            //get players position for other players to listen to a cow muuu depending on the distance
+            _packet.Write(_player.controller.center); 
+
+            SendTCPDataToAll(_packet);
+        }
+    }
+
     #endregion
 }

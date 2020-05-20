@@ -7,6 +7,7 @@ public class NetworkManager : MonoBehaviour //works like the program class
     public static NetworkManager instance;
 
     public GameObject playerPrefab;
+    public GameObject gameManager;
 
     public void Awake()
     {
@@ -45,5 +46,10 @@ public class NetworkManager : MonoBehaviour //works like the program class
     public Player InstantiatePlayer()
     {
         return Instantiate(playerPrefab, Vector3.zero, Quaternion.identity).GetComponent<Player>(); //returns a reference of the player
+    }
+
+    public GameManager StartGameManager()
+    {
+        return Instantiate(gameManager).GetComponent<GameManager>();
     }
 }
