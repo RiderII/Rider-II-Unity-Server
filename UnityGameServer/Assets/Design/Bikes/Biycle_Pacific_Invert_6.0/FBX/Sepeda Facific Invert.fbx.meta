@@ -1,0 +1,233 @@
+fileFormatVersion: 2
+guid: 92ac30a29b525b445acbee237f5541b4
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Armature_sepeda
+    100002: as_sepeda
+    100004: badan_sepeda
+    100006: ban_sepeda_depan
+    100008: base_pedal_kanan
+    100010: base_pedal_kiri
+    100012: base_sepeda
+    100014: base_sepeda_end
+    100016: BezierCircle
+    100018: Bone.002
+    100020: Bone.003
+    100022: Bone.006
+    100024: Bone.007
+    100026: Bone.015
+    100028: Bone.016
+    100030: Cylinder_Cylinder.001
+    100032: gear_belakang
+    100034: gear_belakang 1
+    100036: gear_belakang_end
+    100038: gear_depan
+    100040: gear_depan 1
+    100042: lamp
+    100044: lantai
+    100046: pedal_kanan
+    100048: pedal_kanan 1
+    100050: pedal_kanan_end
+    100052: pedal_kiri
+    100054: pedal_kiri 1
+    100056: pedal_kiri_end
+    100058: rangka_sepeda
+    100060: rantai
+    100062: rantai 1
+    100064: rantai_end
+    100066: roda_depan
+    100068: roda_depan_end
+    100070: root
+    100072: //RootNode
+    100074: stank
+    400000: Armature_sepeda
+    400002: as_sepeda
+    400004: badan_sepeda
+    400006: ban_sepeda_depan
+    400008: base_pedal_kanan
+    400010: base_pedal_kiri
+    400012: base_sepeda
+    400014: base_sepeda_end
+    400016: BezierCircle
+    400018: Bone.002
+    400020: Bone.003
+    400022: Bone.006
+    400024: Bone.007
+    400026: Bone.015
+    400028: Bone.016
+    400030: Cylinder_Cylinder.001
+    400032: gear_belakang
+    400034: gear_belakang 1
+    400036: gear_belakang_end
+    400038: gear_depan
+    400040: gear_depan 1
+    400042: lamp
+    400044: lantai
+    400046: pedal_kanan
+    400048: pedal_kanan 1
+    400050: pedal_kanan_end
+    400052: pedal_kiri
+    400054: pedal_kiri 1
+    400056: pedal_kiri_end
+    400058: rangka_sepeda
+    400060: rantai
+    400062: rantai 1
+    400064: rantai_end
+    400066: roda_depan
+    400068: roda_depan_end
+    400070: root
+    400072: //RootNode
+    400074: stank
+    2100000: gear.001
+    2100002: steel_whiter.001
+    2100004: guma.001
+    2100006: skp_front_defaul.001
+    2100008: uv_pelek_kanan
+    2100010: col_ban
+    2100012: uv_pelek_kiri
+    2100014: col_pelek
+    2100016: uv_ban_kiri
+    2100018: uv_ban_kanan
+    2100020: col_jari2
+    2100022: No Name
+    2100024: dominan.001
+    2100026: ban_luar.001
+    2100028: Material.002
+    2100030: col_rangka_wadah_perr
+    2100032: col_master_btl
+    2100034: col_uv_btl
+    2100036: Material.003
+    2100038: Material.007
+    2100040: Material.006
+    2100042: Material.005
+    2100044: Material.004
+    2100046: None
+    2100048: col_casing_hp
+    2100050: uv_hp
+    2100052: col_pegangan_stank
+    2100054: col_rangka_per_sepeda
+    2100056: Material
+    2100058: col_lantai
+    2300000: ban_sepeda_depan
+    2300002: BezierCircle
+    2300004: Cylinder_Cylinder.001
+    2300006: gear_belakang 1
+    2300008: gear_depan 1
+    2300010: lamp
+    2300012: lantai
+    2300014: pedal_kanan 1
+    2300016: pedal_kiri 1
+    2300018: rangka_sepeda
+    2300020: rantai 1
+    3300000: ban_sepeda_depan
+    3300002: BezierCircle
+    3300004: Cylinder_Cylinder.001
+    3300006: gear_belakang 1
+    3300008: gear_depan 1
+    3300010: lamp
+    3300012: lantai
+    3300014: pedal_kanan 1
+    3300016: pedal_kiri 1
+    3300018: rangka_sepeda
+    3300020: rantai 1
+    4300000: gear_belakang
+    4300002: rantai
+    4300004: gear_depan
+    4300006: pedal_kiri
+    4300008: pedal_kanan
+    4300010: rangka_sepeda
+    4300012: BezierCircle
+    4300014: Cylinder_Cylinder.001
+    4300016: ban_sepeda_depan
+    4300018: lamp
+    4300020: lantai
+    7400000: Armature_sepeda|jalan
+    9500000: //RootNode
+    2186277476908879412: ImportLogs
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
