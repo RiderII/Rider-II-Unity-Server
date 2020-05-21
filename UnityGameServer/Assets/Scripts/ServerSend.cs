@@ -129,5 +129,15 @@ public class ServerSend
         }
     }
 
+    public static void ObstacleSpawned(Vector3 _position)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.obstacleSpawned))
+        {
+            _packet.Write(_position);
+
+            SendTCPDataToAll(_packet);
+        }
+    }
+
     #endregion
 }

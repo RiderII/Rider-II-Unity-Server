@@ -81,9 +81,4 @@ public class Player : MonoBehaviour
         inputs = _inputs;
         transform.rotation = _rotation;
     }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        ServerSend.PlayerCollided(this);
-    }
 }

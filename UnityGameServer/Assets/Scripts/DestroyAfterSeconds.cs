@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DestroyAfterSeconds : MonoBehaviour
 {
-    public float seconds = 10f;
+    public float seconds = 15f;
 
     // Update is called once per frame
     void FixedUpdate()

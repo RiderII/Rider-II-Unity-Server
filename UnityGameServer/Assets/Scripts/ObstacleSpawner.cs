@@ -4,26 +4,31 @@ using UnityEngine;
 
 public class ObstacleSpawner : MonoBehaviour
 {
-    public static Dictionary<int, ObstacleSpawner> spawners = new Dictionary<int, ObstacleSpawner>();
-    private static int nextSpawnerId = 1;
+    private bool isColliding = false;
 
-    public int spawnerId;
-    public bool hasItem = false;
-
-    private void Start()
+    void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        hasItem = false;
-        spawnerId = nextSpawnerId;
-        nextSpawnerId++;
-        spawners.Add(spawnerId, this);
-
-        StartCoroutine(SpawnObstacle());
+        if (hit.transform.tag == "Obstacle")
+        {
+            if (isColliding) return;
+            Debug.Log("HIT!");
+            isColliding = true;
+            StartCoroutine(Reset());
+        }
     }
 
-    private IEnumerator SpawnObstacle()
+    IEnumerator Reset()
     {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(2);
+        isColliding = false;
+    }
 
-        hasItem = true;
+    private void PlayerCollided(Player _player)
+    {
+        Player player = _player;
+        player.collisions += 1;
+        Debug.Log($"COLISIONES: {player.username}");
+        Debug.Log($"COLISIONES: {player.collisions}");
+        ServerSend.PlayerCollided(player);
     }
 }

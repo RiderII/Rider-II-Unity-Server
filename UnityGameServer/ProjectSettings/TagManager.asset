@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Obstacle
+  - PlayerBoxCollider
   layers:
   - Default
   - TransparentFX

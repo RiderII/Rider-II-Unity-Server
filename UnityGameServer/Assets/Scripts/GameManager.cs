@@ -39,9 +39,11 @@ public class GameManager : MonoBehaviour
                 GameObject obstacleObject = Instantiate(obstaclePrefab);
                 obstacleObject.transform.position = new Vector3(
                     Random.Range(-3f, 3f),
-                    1.5f,
+                    1f,
                     player.controller.bounds.center.z + spawnDistanceFromPlayer
                 );
+
+                ServerSend.ObstacleSpawned(obstacleObject.transform.position);
             }
         }
     }
