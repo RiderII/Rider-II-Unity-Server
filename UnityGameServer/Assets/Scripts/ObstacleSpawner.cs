@@ -17,6 +17,7 @@ public class ObstacleSpawner : MonoBehaviour
         }
     }
 
+
     IEnumerator Reset()
     {
         yield return new WaitForSeconds(2);

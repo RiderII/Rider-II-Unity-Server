@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     public float gravity = -9.81f;
     public float jumpSpeed = 5f;
     public float moveSpeed = 5f;
-    public float collisions = 0;
+    public int collisions = 0;
     public float traveled_kilometers = 0;
     public float burned_calories = 0;
 
@@ -37,25 +37,27 @@ public class Player : MonoBehaviour
 
     public void FixedUpdate() //in the server console application this wass called every tick, now it's called every frame
     {
-        Vector2 _inputDirection = Vector2.zero; //we move only in the Y and X axis
-        if (inputs[0])
-        {
-            _inputDirection.y += 1;
-        }
-        if (inputs[1])
-        {
-            _inputDirection.y -= 1;
-        }
-        //if (inputs[2])
-        //{
-        //    _inputDirection.x -= 1;
-        //}
-        //if (inputs[3])
-        //{
-        //    _inputDirection.x += 1;
-        //}
+        if (controller.enabled) {
+            Vector2 _inputDirection = Vector2.zero; //we move only in the Y and X axis
+            if (inputs[0])
+            {
+                _inputDirection.y += 1;
+            }
+            if (inputs[1])
+            {
+                _inputDirection.y -= 1;
+            }
+            //if (inputs[2])
+            //{
+            //    _inputDirection.x -= 1;
+            //}
+            //if (inputs[3])
+            //{
+            //    _inputDirection.x += 1;
+            //}
 
-        Move(_inputDirection);
+            Move(_inputDirection);
+        }
     }
 
     private void Move(Vector2 _inputDirection)

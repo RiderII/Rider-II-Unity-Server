@@ -191,11 +191,11 @@ public class Client
         }
     }
 
-    public void SendIntoGame(string _playerName)
+    public void SendIntoGame(string _playerName, int _playerId = 0)
     {
         int lastPlayerInserverIndex = 0;
         player = NetworkManager.instance.InstantiatePlayer(); //assign a value to our player field
-  
+
         foreach (Client _client in Server.clients.Values)
         {
             if (_client.player != null)
@@ -207,18 +207,23 @@ public class Client
         if (lastPlayerInserverIndex - 2 >= 0)
         {
             float position = Server.clients[lastPlayerInserverIndex - 1].player.controller.center.x; //we can dinamically spwan player based on previous players
-                                                                                                    //positions
-                                                                                                    // player = new Player(id, _playerName, new Vector3(position + 1.5f, 0, 0));
+                                                                                                        //positions
+                                                                                                        // player = new Player(id, _playerName, new Vector3(position + 1.5f, 0, 0));
             player.Initialize(id, _playerName, position + 2.0f);
         }
-        else {
+        else
+        {
             // player = new Player(id, _playerName, new Vector3(0, 0, 0));
             player.Initialize(id, _playerName);
             NetworkManager.instance.StartGameManager();
         }
 
         //send information of all other players already connected to this new player
+        SendPlayerPosition();
+    }
 
+    private void SendPlayerPosition()
+    {
         foreach (Client _client in Server.clients.Values)
         {
             if (_client.player != null)
@@ -239,8 +244,6 @@ public class Client
                 ServerSend.SpawnPlayer(_client.id, player);
             }
         }
-
-
     }
 
     private void Disconnect()

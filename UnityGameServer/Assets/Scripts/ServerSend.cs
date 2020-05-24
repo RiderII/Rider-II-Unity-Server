@@ -95,6 +95,17 @@ public class ServerSend
         }
     }
 
+    public static void RestartPlayerPosition(Player _player)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.restartPlayerPosition))
+        {
+            _packet.Write(_player.id);
+            _packet.Write(_player.transform.position);
+
+            SendTCPDataToAll(_packet);
+        }
+    }
+
     public static void PlayerRotation(Player _player)
     {
         using (Packet _packet = new Packet((int)ServerPackets.playerRotation))
@@ -134,6 +145,16 @@ public class ServerSend
         using (Packet _packet = new Packet((int)ServerPackets.obstacleSpawned))
         {
             _packet.Write(_position);
+
+            SendTCPDataToAll(_packet);
+        }
+    }
+
+    public static void PlayerFinishedGame(int _playerId)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.playerFinishedGame))
+        {
+            _packet.Write(_playerId);
 
             SendTCPDataToAll(_packet);
         }
