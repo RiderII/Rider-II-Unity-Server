@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
     {
         id = _id;
         username = _username;
-        transform.position += transform.right * (Vector2.zero.x + positionx - 1.0f) + transform.forward * Vector2.zero.y + transform.up * 1f;
+        transform.position += transform.right * (Vector2.zero.x + positionx - 1.0f) + transform.forward * Vector2.zero.y + transform.up * 1.0f;
         // position = _spwanPosition;
         // rotation = Quaternion.identity;
 
@@ -73,7 +73,20 @@ public class Player : MonoBehaviour
 
         _moveDirecion.y = yVelocity;
         controller.Move(_moveDirecion);
-        
+
+        if (controller.transform.position.x < -4.0f)
+        {
+            controller.enabled = false;
+            controller.transform.position = new Vector3(-4.0f, controller.transform.position.y, controller.transform.position.z);
+            controller.enabled = true;
+        }
+        else if (controller.transform.position.x > 4.0f)
+        {
+            controller.enabled = false;
+            controller.transform.position = new Vector3(4.0f, controller.transform.position.y, controller.transform.position.z);
+            controller.enabled = true;
+        }
+
         ServerSend.PlayerPosition(this);
         ServerSend.PlayerRotation(this); //client is authorative in rotation
     }
