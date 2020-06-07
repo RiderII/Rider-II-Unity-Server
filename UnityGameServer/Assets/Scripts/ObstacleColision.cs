@@ -32,6 +32,6 @@ public class ObstacleColision: MonoBehaviour
         _player.collisions += 1;
         Debug.Log($"COLISIONES: {_player.username}");
         Debug.Log($"COLISIONES: {_player.collisions}");
-        ServerSend.PlayerCollided(_player);
+        PacketSend.PlayerCollided(_player);
     }
 }

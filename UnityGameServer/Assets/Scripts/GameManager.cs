@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
                 spawnDistanceFromPlayer
             );
 
-            ServerSend.ObstacleSpawned(obstacleObject.transform.position);
+            PacketSend.ObstacleSpawned(obstacleObject.transform.position);
             newObstacleSpawnedTime = Random.Range(2f, 4f);
         }
         else {

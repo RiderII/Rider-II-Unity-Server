@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 
-public class ServerHandle
+public class PacketHandle
 {
     public static void WelcomeReceived(int _fromClient, Packet _packet) //read data from packet in the same order it was sent.
     {
@@ -42,7 +42,7 @@ public class ServerHandle
     {
         Server.clients[_fromClient].player.controller.enabled = false;
         Server.clients[_fromClient].player.transform.position = new Vector3(Vector2.zero.x - 1.0f, Vector2.zero.y, 2f);
-        ServerSend.RestartPlayerPosition(Server.clients[_fromClient].player);
+        PacketSend.RestartPlayerPosition(Server.clients[_fromClient].player);
         Debug.Log($"Player: { Server.clients[_fromClient].username} has been sent to starting position: " +
             $"{Server.clients[_fromClient].player.transform.position}");
         Server.clients[_fromClient].player.controller.enabled = true;

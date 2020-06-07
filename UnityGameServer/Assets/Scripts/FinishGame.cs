@@ -9,7 +9,7 @@ public class FinishGame : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Player player = other.GetComponent<Player>();
-            ServerSend.PlayerFinishedGame(player.id);
+            PacketSend.PlayerFinishedGame(player.id);
         }
     }
 }

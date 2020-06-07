@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ServerSend
+public class PacketSend
 {
     private static void SendTCPData(int _toClient, Packet _packet) //will prepare the packet to be sent
     {

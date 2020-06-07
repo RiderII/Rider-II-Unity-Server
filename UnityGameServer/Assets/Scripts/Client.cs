@@ -48,7 +48,7 @@ public class Client
             stream.BeginRead(receiveBuffer, 0, dataBufferSize, ReceiveCallback, null);
 
             // send welcome packet
-            ServerSend.Welcome(id, "welcome to the server!");
+            PacketSend.Welcome(id, "welcome to the server!");
         }
 
         public void SendData(Packet _packet)
@@ -231,7 +231,7 @@ public class Client
             {
                 if (_client.id != id)
                 {
-                    ServerSend.SpawnPlayer(id, _client.player);
+                    PacketSend.SpawnPlayer(id, _client.player);
                 }
             }
         }
@@ -242,7 +242,7 @@ public class Client
         {
             if (_client.player != null)
             {
-                ServerSend.SpawnPlayer(_client.id, player);
+                PacketSend.SpawnPlayer(_client.id, player);
             }
         }
     }
@@ -260,6 +260,6 @@ public class Client
         tcp.Disconnect();
         udp.Disconnect();
 
-        ServerSend.PlayerDisconnected(id);
+        PacketSend.PlayerDisconnected(id);
     }
 }

@@ -89,8 +89,8 @@ public class Player : MonoBehaviour
             controller.enabled = true;
         }
 
-        ServerSend.PlayerPosition(this);
-        ServerSend.PlayerRotation(this); //client is authorative in rotation
+        PacketSend.PlayerPosition(this);
+        PacketSend.PlayerRotation(this); //client is authorative in rotation
     }
 
     public void SetInput(bool[] _inputs, Quaternion _rotation)
