@@ -14,6 +14,9 @@ public class ObstacleSpawner : MonoBehaviour
             Debug.Log("HIT!");
             isColliding = true;
             StartCoroutine(Reset());
+
+            Player player = hit.controller.gameObject.GetComponent<Player>();
+            PlayerCollided(player);
         }
     }
 
@@ -26,10 +29,9 @@ public class ObstacleSpawner : MonoBehaviour
 
     private void PlayerCollided(Player _player)
     {
-        Player player = _player;
-        player.collisions += 1;
-        Debug.Log($"COLISIONES: {player.username}");
-        Debug.Log($"COLISIONES: {player.collisions}");
-        ServerSend.PlayerCollided(player);
+        _player.collisions += 1;
+        Debug.Log($"COLISIONES: {_player.username}");
+        Debug.Log($"COLISIONES: {_player.collisions}");
+        ServerSend.PlayerCollided(_player);
     }
 }

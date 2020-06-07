@@ -74,6 +74,8 @@ public class Player : MonoBehaviour
         _moveDirecion.y = yVelocity;
         controller.Move(_moveDirecion);
 
+        //stay in the route
+
         if (controller.transform.position.x < -4.0f)
         {
             controller.enabled = false;

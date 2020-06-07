@@ -7,11 +7,7 @@ public class GameManager : MonoBehaviour
     public GameObject obstaclePrefab;
 
     public float spawnDistanceFromPlayer = 20f;
-    public float spawnDistanceFromObstacles = 15f;
-    public float closestPosition;
-    public Player player;
-
-    private float obstaclePointer;
+    private float newObstacleSpawnedTime = 2f;
 
     private void Start()
     {
@@ -20,31 +16,22 @@ public class GameManager : MonoBehaviour
 
     void FixedUpdate()
     {
-        foreach (Client _client in Server.clients.Values)
+        if (newObstacleSpawnedTime <= 0f)
         {
-            if (_client.player != null)
-            {
-                if (closestPosition < _client.player.controller.center.z)
-                {
-                    player = _client.player; //Get The closest Player
-                }
-            }
+            spawnDistanceFromPlayer += Random.Range(5f, 15f);
+
+            GameObject obstacleObject = Instantiate(obstaclePrefab);
+            obstacleObject.transform.position = new Vector3(
+                Random.Range(-3f, 3f),
+                1f,
+                spawnDistanceFromPlayer
+            );
+
+            ServerSend.ObstacleSpawned(obstacleObject.transform.position);
+            newObstacleSpawnedTime = Random.Range(2f, 4f);
         }
-
-        if (player) {
-            if (obstaclePointer < player.controller.bounds.center.z)
-            {
-                obstaclePointer += spawnDistanceFromObstacles;
-
-                GameObject obstacleObject = Instantiate(obstaclePrefab);
-                obstacleObject.transform.position = new Vector3(
-                    Random.Range(-3f, 3f),
-                    1f,
-                    player.controller.bounds.center.z + spawnDistanceFromPlayer
-                );
-
-                ServerSend.ObstacleSpawned(obstacleObject.transform.position);
-            }
+        else {
+            newObstacleSpawnedTime -= Time.deltaTime;
         }
     }
 }

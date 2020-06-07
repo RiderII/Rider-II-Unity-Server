@@ -218,12 +218,13 @@ public class Client
             NetworkManager.instance.StartGameManager();
         }
 
-        //send information of all other players already connected to this new player
         SendPlayerPosition();
     }
 
     private void SendPlayerPosition()
     {
+        //send information of all other players already connected to this new player
+
         foreach (Client _client in Server.clients.Values)
         {
             if (_client.player != null)
