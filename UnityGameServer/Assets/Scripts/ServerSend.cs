@@ -134,7 +134,7 @@ public class ServerSend
             _packet.Write(_player.id);
             _packet.Write(_player.collisions);
             //get players position for other players to listen to a cow muuu depending on the distance
-            _packet.Write(_player.controller.center); 
+            _packet.Write(_player.controller.transform.position); 
 
             SendTCPDataToAll(_packet);
         }

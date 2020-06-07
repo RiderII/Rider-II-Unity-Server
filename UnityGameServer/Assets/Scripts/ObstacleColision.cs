@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObstacleSpawner : MonoBehaviour
+public class ObstacleColision: MonoBehaviour
 {
     private bool isColliding = false;
 
@@ -11,7 +11,7 @@ public class ObstacleSpawner : MonoBehaviour
         if (hit.transform.tag == "Obstacle")
         {
             if (isColliding) return;
-            Debug.Log("HIT!");
+            Debug.Log("HITT!");
             isColliding = true;
             StartCoroutine(Reset());
 
