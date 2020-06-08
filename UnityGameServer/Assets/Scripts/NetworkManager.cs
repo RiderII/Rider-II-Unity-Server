@@ -5,9 +5,12 @@ using UnityEngine;
 public class NetworkManager : MonoBehaviour //works like the program class
 {
     public static NetworkManager instance;
-
+    private bool destroyGameManager = false;
+    public bool verifyDisconnection = false;
+    
     public GameObject playerPrefab;
     public GameObject gameManager;
+    public GameObject gameManagerClone;
 
     public void Awake()
     {
@@ -38,6 +41,35 @@ public class NetworkManager : MonoBehaviour //works like the program class
         //#endif
     }
 
+    private void FixedUpdate()
+    {
+        if (verifyDisconnection)
+        {
+            destroyGameManager = true;
+
+            for (int i = 1; i <= Server.MaxPLayers; i++)
+            {
+                if (Server.clients[i].tcp.socket != null)
+                {
+                    destroyGameManager = false;
+                    verifyDisconnection = false;
+                    return;
+                }
+            }
+
+            if (destroyGameManager)
+            {
+                ThreadManager.ExecuteOnMainThread(() =>
+                {
+                    Destroy(gameManagerClone.gameObject); //has to be destroyed in the main thread
+                });
+                verifyDisconnection = false;
+            }
+        }
+
+       
+    }
+
     private void OnApplicationQuit()
     {
         Server.Stop();
@@ -50,6 +82,7 @@ public class NetworkManager : MonoBehaviour //works like the program class
 
     public GameManager StartGameManager()
     {
-        return Instantiate(gameManager).GetComponent<GameManager>();
+        gameManagerClone = Instantiate(gameManager).GetComponent<GameManager>().gameObject;
+        return null;
     }
 }

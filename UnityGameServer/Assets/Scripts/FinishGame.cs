@@ -10,6 +10,8 @@ public class FinishGame : MonoBehaviour
         {
             Player player = other.GetComponent<Player>();
             PacketSend.PlayerFinishedGame(player.id);
+            GameManager.spawnDistanceFromPlayer = 20f;
+            GameManager.newObstacleSpawnedTime = 5f;
         }
     }
 }

@@ -6,12 +6,13 @@ public class GameManager : MonoBehaviour
 {
     public GameObject obstaclePrefab;
 
-    public float spawnDistanceFromPlayer = 20f;
-    private float newObstacleSpawnedTime = 2f;
+    public static float spawnDistanceFromPlayer = 20f;
+    public static float newObstacleSpawnedTime = 2f;
 
     private void Start()
     {
         Debug.Log("Started!");
+        spawnDistanceFromPlayer = 20f;
     }
 
     void FixedUpdate()

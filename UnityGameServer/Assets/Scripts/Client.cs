@@ -146,6 +146,8 @@ public class Client
             receivedData = null;
             receiveBuffer = null;
             socket = null;
+
+            
         }
     }
 
@@ -251,6 +253,8 @@ public class Client
     {
         Debug.Log($"{tcp.socket.Client.RemoteEndPoint + " " + username} has disconnected.");
 
+        PacketSend.PlayerDisconnected(id);
+
         ThreadManager.ExecuteOnMainThread(() =>
         {
             UnityEngine.Object.Destroy(player.gameObject); //has to be destroyed in the main thread
@@ -260,6 +264,6 @@ public class Client
         tcp.Disconnect();
         udp.Disconnect();
 
-        PacketSend.PlayerDisconnected(id);
+        NetworkManager.instance.verifyDisconnection = true;
     }
 }
