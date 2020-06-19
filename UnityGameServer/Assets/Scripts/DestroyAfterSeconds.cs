@@ -7,7 +7,7 @@ public class DestroyAfterSeconds : MonoBehaviour
     public float seconds = 15f;
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         seconds -= Time.deltaTime;
         if (seconds <= 0f)

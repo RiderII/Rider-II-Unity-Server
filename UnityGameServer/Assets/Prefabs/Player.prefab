@@ -172,11 +172,12 @@ MonoBehaviour:
   username: 
   controller: {fileID: 8361292499331906392}
   gravity: -9.81
-  jumpSpeed: 5
-  moveSpeed: 5
   collisions: 0
   traveled_kilometers: 0
   burned_calories: 0
+  acceleration: 0.6
+  maximunSpeed: 8
+  speed: 0
 --- !u!143 &8361292499331906392
 CharacterController:
   m_ObjectHideFlags: 0

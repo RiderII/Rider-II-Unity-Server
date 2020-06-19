@@ -10,20 +10,29 @@ public class PacketHandle
         int _clientIdCheck = _packet.ReadInt();
         string _username = _packet.ReadString();
 
-        Server.clients[_fromClient].username = _username; //we want to set the client name when logged in
-                                                          // being logged in is implies connecting to the server automatically, but not necessarily into the game
-                                                          // clients names will appear in a list within the invite options perhaps, so we want the names of the connected clients
-                                                          // to be public so that they can be invited to get into a game
-
-        Debug.Log($"{Server.clients[_fromClient].tcp.socket.Client.RemoteEndPoint + " " + Server.clients[_fromClient].username} " +
-            $"connected successfully and is now a player with id: {_fromClient}");
-        if (_fromClient != _clientIdCheck) //Check if the client claimed the correct id
+        if (_username != "Middleware")
         {
-            Debug.Log($"Player \"{_username}\" (ID: {_fromClient}) has assumed the wrong client ID ({_clientIdCheck})!");
-        }
+            Server.clients[_fromClient].username = _username; //we want to set the client name when logged in
+                                                              // being logged in is implies connecting to the server automatically, but not necessarily into the game
+                                                              // clients names will appear in a list within the invite options perhaps, so we want the names of the connected clients
+                                                              // to be public so that they can be invited to get into a game
 
-        // Send  player into game (this is automatic when the users connects to a server we want to modify this behaviour)
-        Server.clients[_fromClient].SendIntoGame(_username);
+            Debug.Log($"{Server.clients[_fromClient].tcp.socket.Client.RemoteEndPoint + " " + Server.clients[_fromClient].username} " +
+                $"connected successfully and is now a player with id: {_fromClient}");
+            if (_fromClient != _clientIdCheck) //Check if the client claimed the correct id
+            {
+                Debug.Log($"Player \"{_username}\" (ID: {_fromClient}) has assumed the wrong client ID ({_clientIdCheck})!");
+            }
+
+            // Send  player into game (this is automatic when the users connects to a server we want to modify this behaviour)
+            Server.clients[_fromClient].SendIntoGame(_username);
+        }
+        else
+        {
+            Server.clients[_fromClient].username = _username;
+            Debug.Log($"Rider II middleware sending data to player with id: {_clientIdCheck}");
+        }
+        
     }
 
     public static void PlayerMovement(int _fromClient, Packet _packet)
@@ -33,9 +42,17 @@ public class PacketHandle
         {
             _inputs[i] = _packet.ReadBool();
         }
-        Quaternion _rotation = _packet.readQuaternion();
 
-        Server.clients[_fromClient].player.SetInput(_inputs, _rotation);
+        if (Server.clients[_fromClient].username != "Middleware")
+        {
+            Quaternion _rotation = _packet.readQuaternion();
+            Server.clients[_fromClient].player.SetInput(_inputs, _rotation);
+        }
+        else
+        {
+            int _toClient = _packet.ReadInt();
+            Server.clients[_toClient].player.SetInput(_inputs);
+        }
     }
 
     public static void RestartScene(int _fromClient, Packet _packet)

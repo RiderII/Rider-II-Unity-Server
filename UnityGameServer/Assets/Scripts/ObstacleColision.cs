@@ -16,6 +16,7 @@ public class ObstacleColision: MonoBehaviour
             StartCoroutine(Reset());
 
             Player player = hit.controller.gameObject.GetComponent<Player>();
+            player.speed *= player.obstacleSlowDown;
             PlayerCollided(player);
         }
     }
