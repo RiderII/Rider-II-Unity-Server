@@ -176,7 +176,8 @@ MonoBehaviour:
   traveled_kilometers: 0
   burned_calories: 0
   acceleration: 0.6
-  maximunSpeed: 8
+  maximunSpeed: 9
+  obstacleSlowDown: 0.25
   speed: 0
 --- !u!143 &8361292499331906392
 CharacterController:

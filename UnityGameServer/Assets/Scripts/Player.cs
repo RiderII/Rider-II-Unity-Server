@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     private bool[] inputs;
     private float yVelocity = 0;
     public float acceleration = 0.6f;
-    public float maximunSpeed = 8f;
+    public float maximunSpeed = 9f;
     public float obstacleSlowDown = 0.25f;
     public float speed = 0f;
 
@@ -65,7 +65,6 @@ public class Player : MonoBehaviour
 
             if (inputs[0])
             {
-                Debug.Log("presionado");
                 if (acceleration < 0)
                 {
                     acceleration *= -1;
@@ -74,7 +73,6 @@ public class Player : MonoBehaviour
             }
             else
             {
-                Debug.Log("soltado");
                 if (acceleration > 0)
                 {
                     acceleration *= -1;
