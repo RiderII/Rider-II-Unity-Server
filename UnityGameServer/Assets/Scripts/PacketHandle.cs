@@ -5,10 +5,11 @@ using UnityEngine;
 
 public class PacketHandle
 {
-    public static void WelcomeReceived(int _fromClient, Packet _packet) //read data from packet in the same order it was sent.
+    public static void RequestEnterLobby(int _fromClient, Packet _packet) //read data from packet in the same order it was sent.
     {
         int _clientIdCheck = _packet.ReadInt();
         string _username = _packet.ReadString();
+        string _league = _packet.ReadString();
 
         if (_username != "Middleware")
         {
@@ -25,14 +26,27 @@ public class PacketHandle
             }
 
             // Send  player into game (this is automatic when the users connects to a server we want to modify this behaviour)
-            Server.clients[_fromClient].SendIntoGame(_username);
+            Server.clients[_fromClient].SendIntoLobby(_league);
         }
         else
         {
             Server.clients[_fromClient].username = _username;
             Debug.Log($"Rider II middleware sending data to player with id: {_clientIdCheck}");
         }
-        
+
+    }
+
+    public static void SendReadyState(int _fromClient, Packet _packet)
+    {
+        int clientId = _packet.ReadInt();
+        PacketSend.SendReadyState(_fromClient);
+    }
+
+    public static void SendToGame(int _fromClient, Packet _packet)
+    {
+        int clientId = _packet.ReadInt();
+        string _username = _packet.ReadString();
+        Server.clients[clientId].SendIntoGame(_username);
     }
 
     public static void PlayerMovement(int _fromClient, Packet _packet)

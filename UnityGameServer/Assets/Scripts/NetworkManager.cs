@@ -7,7 +7,7 @@ public class NetworkManager : MonoBehaviour //works like the program class
     public static NetworkManager instance;
     private bool destroyGameManager = false;
     public bool verifyDisconnection = false;
-    
+
     public GameObject playerPrefab;
     public GameObject gameManager;
     public GameObject gameManagerClone;
@@ -37,7 +37,7 @@ public class NetworkManager : MonoBehaviour //works like the program class
         //#if UNITY_EDITOR
         //Debug.Log("Build the project to start the server!");
         //#else
-        Server.Start(50, 26950);
+        Server.Start(4, 26950);
         //#endif
     }
 
@@ -67,7 +67,7 @@ public class NetworkManager : MonoBehaviour //works like the program class
             }
         }
 
-       
+
     }
 
     private void OnApplicationQuit()
@@ -82,7 +82,11 @@ public class NetworkManager : MonoBehaviour //works like the program class
 
     public GameManager StartGameManager()
     {
-        gameManagerClone = Instantiate(gameManager).GetComponent<GameManager>().gameObject;
+        if (gameManagerClone != null)
+        {
+            gameManagerClone = Instantiate(gameManager).GetComponent<GameManager>().gameObject;
+        }
+
         return null;
     }
 }

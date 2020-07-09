@@ -39,7 +39,7 @@ public class Client
             socket.ReceiveBufferSize = dataBufferSize;
             socket.SendBufferSize = dataBufferSize;
 
-            stream = socket.GetStream();
+            stream = socket.GetStream(); //returns a NetworkStream to send and receive data
 
             receivedData = new Packet();
 
@@ -47,8 +47,8 @@ public class Client
 
             stream.BeginRead(receiveBuffer, 0, dataBufferSize, ReceiveCallback, null);
 
-            // send welcome packet
-            PacketSend.Welcome(id, "welcome to the server!");
+            // send player to the lobby
+            PacketSend.EnterLobby(id, "Joining the lobby!");
         }
 
         public void SendData(Packet _packet)
@@ -147,7 +147,7 @@ public class Client
             receiveBuffer = null;
             socket = null;
 
-            
+
         }
     }
 
@@ -193,24 +193,42 @@ public class Client
         }
     }
 
+    public void SendIntoLobby(string _league)
+    {
+        foreach (Client _client in Server.clients.Values)
+        {
+            if (_client.tcp.socket != null)
+            {
+                PacketSend.SendToLobby(_client.id, _client.username, _league); //Send new player entered in the lobby to all
+            }
+        }
+    }
+
     public void SendIntoGame(string _playerName, int _playerId = 0)
     {
         int lastPlayerInserverIndex = 0;
+        float farRight = -1.0f;
+        int lasPlayerId = 0;
         player = NetworkManager.instance.InstantiatePlayer(); //assign a value to our player field
 
         foreach (Client _client in Server.clients.Values)
         {
             if (_client.player != null)
             {
-                lastPlayerInserverIndex = _client.id;
+                lastPlayerInserverIndex += 1;
+                if (_client.id != id && (_client.player.controller.center.x >= farRight))
+                {
+                    farRight = _client.player.controller.center.x;
+                    lasPlayerId = _client.id;
+                }
             }
         }
 
-        if (lastPlayerInserverIndex - 2 >= 0)
+        if (lastPlayerInserverIndex > 1)
         {
-            float position = Server.clients[lastPlayerInserverIndex - 1].player.controller.center.x; //we can dinamically spwan player based on previous players
-                                                                                                        //positions
-                                                                                                        // player = new Player(id, _playerName, new Vector3(position + 1.5f, 0, 0));
+            float position = Server.clients[lasPlayerId].player.controller.center.x; //we can dinamically spwan player based on previous players
+                                                                                     //positions
+                                                                                     // player = new Player(id, _playerName, new Vector3(position + 1.5f, 0, 0));
             player.Initialize(id, _playerName, position + 2.0f);
         }
         else
@@ -227,7 +245,7 @@ public class Client
     {
         //send information of all other players already connected to this new player
 
-        foreach (Client _client in Server.clients.Values)
+        foreach (Client _client in Server.clients.Values) // Recibo la posicion de los jugadores ya conectados
         {
             if (_client.player != null)
             {
@@ -240,7 +258,7 @@ public class Client
 
         //Send the new player information to all other players as well as to himself
 
-        foreach (Client _client in Server.clients.Values)
+        foreach (Client _client in Server.clients.Values) // A cada cliente le envio mi posicion
         {
             if (_client.player != null)
             {

@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
 
     public void FixedUpdate() //in the server console application this wass called every tick, now it's called every frame
     {
-        if (controller.enabled)
+        if (controller && controller.enabled)
         {
             if (controller.isGrounded)
             {
