@@ -82,7 +82,7 @@ public class NetworkManager : MonoBehaviour //works like the program class
 
     public GameManager StartGameManager()
     {
-        if (gameManagerClone != null)
+        if (gameManagerClone == null)
         {
             gameManagerClone = Instantiate(gameManager).GetComponent<GameManager>().gameObject;
         }
