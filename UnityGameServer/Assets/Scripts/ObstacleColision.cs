@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObstacleColision: MonoBehaviour
+public class ObstacleColision : MonoBehaviour
 {
     private bool isColliding = false;
 

@@ -60,14 +60,35 @@ public class PacketSend
 
     #region Packets
 
-    public static void Welcome(int _toClient, string _msg) //send packet to a specific client
+    public static void EnterLobby(int _toClient, string _msg) //send packet to a specific client
     {
-        using (Packet _packet = new Packet((int)ServerPackets.welcome))
+        using (Packet _packet = new Packet((int)ServerPackets.enterLobby))
         {
             _packet.Write(_msg); //write the message to the packet
             _packet.Write(_toClient);
 
             SendTCPData(_toClient, _packet);
+        }
+    }
+
+    public static void SendToLobby(int _clientId, string _playerName, string _league)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.sendToLobby))
+        {
+            _packet.Write(_clientId);
+            _packet.Write(_playerName);
+            _packet.Write(_league);
+
+            SendTCPDataToAll(_packet);
+        }
+    }
+
+    public static void SendReadyState(int _clientId)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.sendReadyState))
+        {
+            _packet.Write(_clientId);
+            SendTCPDataToAll(_packet);
         }
     }
 
@@ -134,7 +155,7 @@ public class PacketSend
             _packet.Write(_player.id);
             _packet.Write(_player.collisions);
             //get players position for other players to listen to a cow muuu depending on the distance
-            _packet.Write(_player.controller.transform.position); 
+            _packet.Write(_player.controller.transform.position);
 
             SendTCPDataToAll(_packet);
         }

@@ -31,7 +31,8 @@ public class GameManager : MonoBehaviour
             PacketSend.ObstacleSpawned(obstacleObject.transform.position);
             newObstacleSpawnedTime = Random.Range(2f, 4f);
         }
-        else {
+        else
+        {
             newObstacleSpawnedTime -= Time.deltaTime;
         }
     }

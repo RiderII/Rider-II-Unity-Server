@@ -27,7 +27,7 @@ public class Server
 
         tcpListener = new TcpListener(IPAddress.Any, Port);
         tcpListener.Start();
-        tcpListener.BeginAcceptTcpClient(new AsyncCallback(TCPConnectCallback), null);
+        tcpListener.BeginAcceptTcpClient(new AsyncCallback(TCPConnectCallback), null); // Returns and IAsuncResult (creates and connects socket)
 
         udpListener = new UdpClient(_port);
         udpListener.BeginReceive(UDPReceiveCallback, null);
@@ -37,7 +37,8 @@ public class Server
 
     private static void TCPConnectCallback(IAsyncResult _result)
     {
-        TcpClient _client = tcpListener.EndAcceptTcpClient(_result);
+        // Ending async request
+        TcpClient _client = tcpListener.EndAcceptTcpClient(_result); // Asynchronously accepts an incoming connection attempt and creates a new TcpClient to handle remote host communication.
         tcpListener.BeginAcceptTcpClient(new AsyncCallback(TCPConnectCallback), null); // keep listeting for new connections
         Debug.Log($"Incoming connection from {_client.Client.RemoteEndPoint}...");
 
@@ -120,11 +121,13 @@ public class Server
         }
 
         packetHandlers = new Dictionary<int, Packethandler>()
-            {
-                { (int)ClientPackets.welcomeReceived, PacketHandle.WelcomeReceived },
-                { (int)ClientPackets.playerMovement, PacketHandle.PlayerMovement },
-                { (int)ClientPackets.restartScene, PacketHandle.RestartScene },
-            };
+        {
+            { (int)ClientPackets.requestEnteredLobby, PacketHandle.RequestEnterLobby },
+            { (int)ClientPackets.sendReadyState, PacketHandle.SendReadyState },
+            { (int)ClientPackets.sendToGame, PacketHandle.SendToGame },
+            { (int)ClientPackets.playerMovement, PacketHandle.PlayerMovement },
+            { (int)ClientPackets.restartScene, PacketHandle.RestartScene },
+        };
         Debug.Log("Packets initialized");
     }
 
@@ -138,6 +141,6 @@ public class Server
         if (udpListener != null)
         {
             udpListener.Close();
-        } 
+        }
     }
 }
