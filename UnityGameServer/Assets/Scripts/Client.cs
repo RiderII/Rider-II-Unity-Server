@@ -9,6 +9,7 @@ public class Client
 
     public int id;
     public string username;
+    public string lobbyState = "Pendiente";
     public Player player;
     public TCP tcp; // reference to its tcp class
     public UDP udp;
