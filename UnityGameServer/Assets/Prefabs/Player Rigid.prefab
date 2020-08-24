@@ -220,7 +220,7 @@ GameObject:
   - component: {fileID: 8138357687039772532}
   m_Layer: 0
   m_Name: Player Rigid
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -319,6 +319,7 @@ MonoBehaviour:
   collisions: 0
   traveled_kilometers: 0
   burned_calories: 0
+  steps: []
   acceleration: 0.6
   maximunSpeed: 9
   obstacleSlowDown: 0.25

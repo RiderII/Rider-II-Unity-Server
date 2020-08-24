@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     public int collisions = 0;
     public float traveled_kilometers = 0;
     public float burned_calories = 0;
+    public List<string> steps = new List<string>();
 
     private bool[] inputs;
     private float yVelocity = 0;
@@ -20,6 +21,7 @@ public class Player : MonoBehaviour
     public float obstacleSlowDown = 0.25f;
     public float speed = 0f;
     private string currentSceneName;
+    public bool reachedFinishLine = false;
 
     public void Initialize(int _id, string _username, float positionx, Player player)
     {
@@ -91,7 +93,7 @@ public class Player : MonoBehaviour
             }
 
 
-            if (inputs[0])
+            if (inputs[0] && !reachedFinishLine)
             {
                 if (acceleration < 0)
                 {
@@ -106,9 +108,25 @@ public class Player : MonoBehaviour
                     player.transform.Translate(speed * Time.deltaTime, 0f, 0f);
                 }
             }
-            else
+            if (!inputs[0] && !reachedFinishLine)
             {
                 if (acceleration > 0)
+                {
+                    acceleration *= -1;
+                }
+            }
+
+            if (reachedFinishLine && acceleration > 0)
+            {
+                if (speed > 7)
+                {
+                    acceleration *= -5;
+                }
+                else if (speed > 5)
+                {
+                    acceleration *= -3;
+                }
+                else
                 {
                     acceleration *= -1;
                 }

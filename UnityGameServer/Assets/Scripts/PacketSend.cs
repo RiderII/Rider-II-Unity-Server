@@ -171,12 +171,12 @@ public class PacketSend
         }
     }
 
-    public static void PlayerFinishedGame(int _playerId)
+    public static void PlayerFinishedGame(int _playerId, float _speed)
     {
         using (Packet _packet = new Packet((int)ServerPackets.playerFinishedGame))
         {
             _packet.Write(_playerId);
-
+            _packet.Write(_speed);
             SendTCPDataToAll(_packet);
         }
     }
