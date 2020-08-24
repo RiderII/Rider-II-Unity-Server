@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Game.unity
+    path: Assets/Scenes/Start.unity
+    guid: 2488cf162e463d24ea820e373d86596c
+  - enabled: 1
+    path: Assets/Scenes/Vaquita.unity
     guid: 1f093938d12327146b423e6acfa326d2
+  - enabled: 1
+    path: Assets/Scenes/Circuito cerrado.unity
+    guid: 3f789c3adde1b344088a752707caf467
   m_configObjects: {}

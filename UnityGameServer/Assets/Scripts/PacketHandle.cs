@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PacketHandle
 {
@@ -10,6 +11,15 @@ public class PacketHandle
         int _clientIdCheck = _packet.ReadInt();
         string _username = _packet.ReadString();
         string _league = _packet.ReadString();
+        string _scene = _packet.ReadString();
+
+       
+        if (NetworkManager.instance.sceneName == "")
+        {
+            NetworkManager.instance.sceneName = _scene;
+            SceneManager.LoadScene(_scene);
+        }
+        
 
         if (_username != "Middleware")
         {
