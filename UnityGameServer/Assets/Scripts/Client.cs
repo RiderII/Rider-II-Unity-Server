@@ -253,7 +253,6 @@ public class Client
         }
         else
         {
-            // player = new Player(id, _playerName, new Vector3(0, 0, 0));
             player.Initialize(id, _playerName, 0f, player);
             NetworkManager.instance.StartGameManager();
         }
