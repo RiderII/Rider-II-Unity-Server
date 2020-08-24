@@ -308,7 +308,7 @@ MonoBehaviour:
   verifyDisconnection: 0
   playerPrefab: {fileID: 8282515381085317744, guid: 52239d1f5c6cc8e4ebb87c74b898e892,
     type: 3}
-  playerPrefabRigid: {fileID: 8282515381085317744, guid: b7c0c60311f18d84faa84a9ee7dc1bcc,
+  playerPrefabRigid: {fileID: 3102381213145884058, guid: 2fc3491689acb2a43bd50739e5b2bb29,
     type: 3}
   gameManager: {fileID: 5930781048178196454, guid: 6921f1a19578abd448051c8cbbb4969f,
     type: 3}

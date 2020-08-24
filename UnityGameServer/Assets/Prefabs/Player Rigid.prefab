@@ -219,7 +219,7 @@ GameObject:
   - component: {fileID: 8380149905121003819}
   - component: {fileID: 8138357687039772532}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Player Rigid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -314,7 +314,7 @@ MonoBehaviour:
   id: 0
   username: 
   controller: {fileID: 0}
-  player: {fileID: 0}
+  player: {fileID: 8138357687039772532}
   gravity: -9.81
   collisions: 0
   traveled_kilometers: 0

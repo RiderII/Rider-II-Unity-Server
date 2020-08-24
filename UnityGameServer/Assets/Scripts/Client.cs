@@ -218,9 +218,17 @@ public class Client
             {
                 lastPlayerInserverIndex += 1;
                 if ((_client.id != id && _client.player.controller  && (_client.player.controller.center.x >= farRight)) ||
-                    (_client.id != id && _client.player && (_client.player.transform.position.x >= farRight)))
+                    (_client.id != id && _client.player.transform.position.x >= farRight))
                 {
-                    farRight = _client.player.controller.center.x;
+                    if (NetworkManager.instance.sceneName == "Vaquita")
+                    {
+                        farRight = _client.player.controller.center.x;
+                    }
+                    else
+                    {
+                        farRight = _client.player.transform.position.x;
+                    }
+                    
                     lasPlayerId = _client.id;
                 }
             }

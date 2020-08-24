@@ -25,8 +25,17 @@ public class Player : MonoBehaviour
     {
         id = _id;
         username = _username;
-        transform.position += transform.right * (player.transform.position.x + positionx - 1.0f) + transform.forward * player.transform.position.y + transform.up * 1.0f;
         currentSceneName = NetworkManager.instance.sceneName;
+
+        if (currentSceneName == "Vaquita")
+        {
+            transform.position += transform.right * (player.transform.position.x + positionx - 1.0f) + transform.forward * player.transform.position.y + transform.up * 1.0f;
+        }
+        else
+        {
+            transform.position = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z);
+        }
+        
 
         inputs = new bool[4];
     }
