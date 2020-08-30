@@ -17,7 +17,9 @@ public enum ServerPackets
     playerCollided,
     obstacleSpawned,
     playerFinishedGame,
-    restartPlayerPosition
+    restartPlayerPosition,
+    playerCollidedWithOtherPlayer,
+    elementCollision
 }
 
 /// <summary>Sent from client to server.</summary> 

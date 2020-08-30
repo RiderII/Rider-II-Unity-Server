@@ -161,6 +161,37 @@ public class PacketSend
         }
     }
 
+    public static void PlayerCollidedWithOtherPlayer(float _speed, bool _collision)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.playerCollidedWithOtherPlayer))
+        {
+            _packet.Write(_speed);
+            _packet.Write(_collision);
+            SendTCPDataToAll(_packet);
+        }
+    }
+
+    public static void ElementCollision(string _elementTag, Player _player, ElementCollision _element)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.elementCollision))
+        {
+            _packet.Write(_player.id);
+            _packet.Write(_elementTag);
+            _packet.Write(_player.collisions);
+            //get players position for other players to listen to a cow muuu depending on the distance
+            if (NetworkManager.instance.sceneName == "Vaquita")
+            {
+                _packet.Write(_player.controller.transform.position);
+            }
+            else
+            {
+                _packet.Write(_player.transform.position);
+                _packet.Write(_element.transform.position);
+            }
+            SendTCPDataToAll(_packet);
+        }
+    }
+
     public static void ObstacleSpawned(Vector3 _position)
     {
         using (Packet _packet = new Packet((int)ServerPackets.obstacleSpawned))

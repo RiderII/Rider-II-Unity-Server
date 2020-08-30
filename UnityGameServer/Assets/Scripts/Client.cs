@@ -208,7 +208,7 @@ public class Client
     public void SendIntoGame(string _playerName, int _playerId = 0)
     {
         int lastPlayerInserverIndex = 0;
-        float farRight = NetworkManager.instance.sceneName == "Vaquita" ? -1.0f : -26.0f;
+        float farRight = NetworkManager.instance.sceneName == "Vaquita" ? -1.0f : 0f;
         int lasPlayerId = 0;
         player = NetworkManager.instance.InstantiatePlayer(); //assign a value to our player field
 
@@ -218,7 +218,7 @@ public class Client
             {
                 lastPlayerInserverIndex += 1;
                 if ((_client.id != id && _client.player.controller  && (_client.player.controller.center.x >= farRight)) ||
-                    (_client.id != id && _client.player.transform.position.x >= farRight))
+                    (_client.id != id && (_client.player.transform.position.x <= farRight)))
                 {
                     if (NetworkManager.instance.sceneName == "Vaquita")
                     {
@@ -241,15 +241,13 @@ public class Client
             if (Server.clients[lasPlayerId].player.controller)
             {
                 position = Server.clients[lasPlayerId].player.controller.center.x; //we can dinamically spwan player based on previous players
-                                                                                         //positions
-                                                                                         // player = new Player(id, _playerName, new Vector3(position + 1.5f, 0, 0));
+                player.Initialize(id, _playerName, position + 2.0f, player); //positions player = new Player(id, _playerName, new Vector3(position + 1.5f, 0, 0));
             }
             else
             {
                 position = Server.clients[lasPlayerId].player.transform.position.x;
+                player.Initialize(id, _playerName, position - 3.0f, player);
             }
-
-            player.Initialize(id, _playerName, position + 2.0f, player);
         }
         else
         {
