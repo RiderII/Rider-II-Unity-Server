@@ -161,6 +161,16 @@ public class PacketSend
         }
     }
 
+    public static void SpeedUp(int playerId, bool speedUp)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.speedUp))
+        {
+            _packet.Write(playerId);
+            _packet.Write(speedUp);
+            SendTCPDataToAll(_packet);
+        }
+    }
+
     public static void PlayerCollidedWithOtherPlayer(float _speed, bool _collision)
     {
         using (Packet _packet = new Packet((int)ServerPackets.playerCollidedWithOtherPlayer))

@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
     public float maximunSpeed = 9f;
     public float obstacleSlowDown = 0.25f;
     public float speed = 0f;
+    public bool surpassSpeed = false;
     private string currentSceneName;
     public bool reachedFinishLine = false;
 
@@ -35,7 +36,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            transform.position = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z);
+            transform.position = new Vector3(positionx, player.transform.position.y, player.transform.position.z);
         }
         
 
@@ -70,9 +71,9 @@ public class Player : MonoBehaviour
 
             speed += acceleration * Time.fixedDeltaTime;
 
-            if (speed > maximunSpeed)
+            if (speed > maximunSpeed && !surpassSpeed)
             {
-                speed = maximunSpeed;
+                StartCoroutine(SlowDown());
             }
 
             if (speed < 0)
@@ -153,6 +154,15 @@ public class Player : MonoBehaviour
 
             PacketSend.PlayerPosition(this);
             PacketSend.PlayerRotation(this); //client is authorative in rotation
+        }
+    }
+
+    IEnumerator SlowDown()
+    {
+        if (speed > maximunSpeed && !surpassSpeed)
+        {
+            speed -= 0.1f;
+            yield return new WaitForSeconds(0.2f);
         }
     }
 

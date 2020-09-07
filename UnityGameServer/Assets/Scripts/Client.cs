@@ -246,12 +246,12 @@ public class Client
             else
             {
                 position = Server.clients[lasPlayerId].player.transform.position.x;
-                player.Initialize(id, _playerName, position - 3.0f, player);
+                player.Initialize(id, _playerName, position - 1.5f, player);
             }
         }
         else
         {
-            player.Initialize(id, _playerName, 0f, player);
+            player.Initialize(id, _playerName, player.transform.position.x, player);
             NetworkManager.instance.StartGameManager();
         }
 
@@ -299,6 +299,7 @@ public class Client
         tcp.Disconnect();
         udp.Disconnect();
 
+        NetworkManager.instance.sceneName = "";
         NetworkManager.instance.verifyDisconnection = true;
     }
 }

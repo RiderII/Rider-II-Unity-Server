@@ -19,7 +19,8 @@ public enum ServerPackets
     playerFinishedGame,
     restartPlayerPosition,
     playerCollidedWithOtherPlayer,
-    elementCollision
+    elementCollision,
+    speedUp
 }
 
 /// <summary>Sent from client to server.</summary> 

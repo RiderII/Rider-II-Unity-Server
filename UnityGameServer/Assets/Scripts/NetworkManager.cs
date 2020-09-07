@@ -86,9 +86,13 @@ public class NetworkManager : MonoBehaviour //works like the program class
         {
             return Instantiate(playerPrefab, Vector3.zero, Quaternion.identity).GetComponent<Player>(); //returns a reference of the player
         }
-        else
+        else if (sceneName == "200 metros")
         {
             return Instantiate(playerPrefabRigid, new Vector3(-25.706f, 0.606f, -21.200f), Quaternion.Euler(-0.807f, 111.458f, 0.017f)).GetComponent<Player>(); //returns a reference of the player
+        }
+        else
+        {
+            return Instantiate(playerPrefabRigid, new Vector3(-20.5f, 0.5f, -28.2f), Quaternion.Euler(-0f, 116.09f, 0f)).GetComponent<Player>(); //returns a reference of the player
         }
     }
 
