@@ -47,7 +47,7 @@ public class ElementCollision : MonoBehaviour
 
             else if (tag == "RampUp")
             {
-                player.speed += 10;
+                player.speed += 12;
                 player.surpassSpeed = true;
                 PacketSend.SpeedUp(player.id, true);
             }
@@ -63,6 +63,7 @@ public class ElementCollision : MonoBehaviour
     IEnumerator SlowDown(Player player)
     {
         yield return new WaitForSeconds(2);
+        player.surpassSpeed = false;
         PacketSend.SpeedUp(player.id, false);
     }
 }
