@@ -171,6 +171,20 @@ public class PacketSend
         }
     }
 
+    public static void SendPlayerStatisticsToAll(int playerId, float burned_calories, float traveled_meters, float totalScore, float finalTime, int placement)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.sendPlayerStatisticsToAll))
+        {
+            _packet.Write(playerId);
+            _packet.Write(burned_calories);
+            _packet.Write(traveled_meters);
+            _packet.Write(totalScore);
+            _packet.Write(finalTime);
+            _packet.Write(placement);
+            SendTCPDataToAll(_packet);
+        }
+    }
+
     public static void PlayerCollidedWithOtherPlayer(float _speed, bool _collision)
     {
         using (Packet _packet = new Packet((int)ServerPackets.playerCollidedWithOtherPlayer))

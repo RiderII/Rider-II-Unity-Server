@@ -79,6 +79,17 @@ public class PacketHandle
         }
     }
 
+    public static void RecievePlayerStatistics(int _fromCLient, Packet _packet)
+    {
+        int clientId = _packet.ReadInt();
+        float burned_calories = _packet.ReadFloat();
+        float traveled_meters = _packet.ReadFloat();
+        float totalScore = _packet.ReadFloat();
+        float finalTime = _packet.ReadFloat();
+        int placement = _packet.ReadInt();
+        PacketSend.SendPlayerStatisticsToAll(clientId, burned_calories, traveled_meters, totalScore, finalTime, placement);
+    }
+
     public static void RestartScene(int _fromClient, Packet _packet)
     {
         Server.clients[_fromClient].player.controller.enabled = false;
