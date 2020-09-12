@@ -246,7 +246,7 @@ public class Client
             else
             {
                 position = Server.clients[lasPlayerId].player.transform.position.x;
-                player.Initialize(id, _playerName, position - 1.5f, player);
+                player.Initialize(id, _playerName, position - 2.0f, player);
             }
         }
         else

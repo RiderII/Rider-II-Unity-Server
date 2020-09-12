@@ -6,15 +6,6 @@ public class ElementCollision : MonoBehaviour
 {
     private bool isColliding = false;
 
-    private void OnTriggerExit(Collider other)
-    {
-        Player player = other.transform.gameObject.GetComponent<Player>();
-        if (tag == "RampUp")
-        {
-            StartCoroutine(SlowDown(player));
-        }
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -26,12 +17,9 @@ public class ElementCollision : MonoBehaviour
 
             Player player = other.transform.gameObject.GetComponent<Player>();
 
-            if (tag != "RampUp" && tag != "RampDown")
-            {
-                player.speed *= 0.80f;
-                player.collisions += 1;
-            }
-                
+            player.speed *= 0.80f;
+            player.collisions += 1;
+
             if (tag == "Tires")
             {
                 PacketSend.ElementCollision("Tires", player, this);
@@ -44,13 +32,6 @@ public class ElementCollision : MonoBehaviour
             {
                 PacketSend.ElementCollision("Tree", player, this);
             }
-
-            else if (tag == "RampUp")
-            {
-                player.speed += 12;
-                player.surpassSpeed = true;
-                PacketSend.SpeedUp(player.id, true);
-            }
         }
     }
 
@@ -58,12 +39,5 @@ public class ElementCollision : MonoBehaviour
     {
         yield return new WaitForSeconds(3);
         isColliding = false;
-    }
-
-    IEnumerator SlowDown(Player player)
-    {
-        yield return new WaitForSeconds(2);
-        player.surpassSpeed = false;
-        PacketSend.SpeedUp(player.id, false);
     }
 }

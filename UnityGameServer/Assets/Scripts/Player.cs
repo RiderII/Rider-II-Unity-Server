@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
     public int id;
     public string username;
+    public int points = 0;
     public CharacterController controller;
     public Rigidbody player;
     public float gravity = -9.81f;
@@ -13,6 +14,7 @@ public class Player : MonoBehaviour
     public float traveled_kilometers = 0;
     public float burned_calories = 0;
     public List<string> steps = new List<string>();
+    private int previouSteps = 0;
 
     private bool[] inputs;
     private float yVelocity = 0;
@@ -23,6 +25,8 @@ public class Player : MonoBehaviour
     public bool surpassSpeed = false;
     private string currentSceneName;
     public bool reachedFinishLine = false;
+
+    private float distanceTimer;
 
     public void Initialize(int _id, string _username, float positionx, Player player)
     {
@@ -45,6 +49,8 @@ public class Player : MonoBehaviour
 
     public void FixedUpdate() //in the server console application this wass called every tick, now it's called every frame
     {
+        distanceTimer += Time.deltaTime;
+
         if ((currentSceneName == "Vaquita" && controller && controller.enabled) ||
             (currentSceneName != "Vaquita" && player))
         {
@@ -67,6 +73,17 @@ public class Player : MonoBehaviour
             if (currentSceneName == "Vaquita")
             {
                 direction = new Vector3(controller.transform.forward.x, 0, controller.transform.forward.z);
+            }
+            else
+            {
+                if (distanceTimer >= 5f)
+                {
+                    int stepsPassed = steps.Count - previouSteps;
+                    CalculatePoints(stepsPassed);
+                    PacketSend.UpdatePlayerPoints(this);
+                    previouSteps = steps.Count;
+                    distanceTimer = 0f;
+                }
             }
 
             speed += acceleration * Time.fixedDeltaTime;
@@ -170,5 +187,16 @@ public class Player : MonoBehaviour
     {
         inputs = _inputs;
         if (_rotation != null) transform.rotation = (Quaternion)_rotation;
+    }
+
+    private void CalculatePoints(int stepsPassed)
+    {
+        switch (stepsPassed)
+        {
+            case var _ when stepsPassed >= 12: points += 250; break;
+            case var _ when stepsPassed >= 10: points += 200; break;
+            case var _ when stepsPassed >= 8: points += 150; break;
+            case var _ when stepsPassed >= 6: points += 100; break;
+        }
     }
 }

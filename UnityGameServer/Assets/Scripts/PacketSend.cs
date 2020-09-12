@@ -171,14 +171,34 @@ public class PacketSend
         }
     }
 
-    public static void SendPlayerStatisticsToAll(int playerId, float burned_calories, float traveled_meters, float totalScore, float finalTime, int placement)
+    public static void UpdatePlayerSteps(int playerId, int steps)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.updatePlayerSteps))
+        {
+            _packet.Write(playerId);
+            _packet.Write(steps);
+            SendTCPDataToAll(_packet);
+        }
+    }
+
+    public static void UpdatePlayerPoints(Player player)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.updatePlayerPoints))
+        {
+            _packet.Write(player.id);
+            _packet.Write(player.points);
+            SendTCPDataToAll(_packet);
+        }
+    }
+
+    public static void SendPlayerStatisticsToAll(int playerId, float burned_calories, float traveled_meters, int points, float finalTime, int placement)
     {
         using (Packet _packet = new Packet((int)ServerPackets.sendPlayerStatisticsToAll))
         {
             _packet.Write(playerId);
             _packet.Write(burned_calories);
             _packet.Write(traveled_meters);
-            _packet.Write(totalScore);
+            _packet.Write(points);
             _packet.Write(finalTime);
             _packet.Write(placement);
             SendTCPDataToAll(_packet);

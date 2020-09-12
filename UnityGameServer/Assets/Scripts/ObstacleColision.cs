@@ -5,6 +5,12 @@ using UnityEngine;
 public class ObstacleColision : MonoBehaviour
 {
     private bool isColliding = false;
+    private Player player;
+
+    private void Start()
+    {
+        player = transform.gameObject.GetComponent<Player>();
+    }
 
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
@@ -34,5 +40,30 @@ public class ObstacleColision : MonoBehaviour
         Debug.Log($"COLISIONES: {_player.username}");
         Debug.Log($"COLISIONES: {_player.collisions}");
         PacketSend.PlayerCollided(_player);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "RampUp")
+        {
+            StartCoroutine(SlowDown());
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    { 
+        if (other.tag == "RampUp")
+        {
+            player.speed += 12;
+            player.surpassSpeed = true;
+            PacketSend.SpeedUp(player.id, true);
+        }
+    }
+
+    IEnumerator SlowDown()
+    {
+        yield return new WaitForSeconds(2);
+        player.surpassSpeed = false;
+        PacketSend.SpeedUp(player.id, false);
     }
 }

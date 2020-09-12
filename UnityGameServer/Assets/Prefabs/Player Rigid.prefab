@@ -217,6 +217,7 @@ GameObject:
   - component: {fileID: 7953726514303991439}
   - component: {fileID: 228322013234056663}
   - component: {fileID: 8380149905121003819}
+  - component: {fileID: 298139936900606323}
   - component: {fileID: 8138357687039772532}
   m_Layer: 0
   m_Name: Player Rigid
@@ -313,6 +314,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   username: 
+  points: 0
   controller: {fileID: 0}
   player: {fileID: 8138357687039772532}
   gravity: -9.81
@@ -324,6 +326,7 @@ MonoBehaviour:
   maximunSpeed: 9
   obstacleSlowDown: 0.25
   speed: 0
+  surpassSpeed: 0
   reachedFinishLine: 0
 --- !u!114 &8380149905121003819
 MonoBehaviour:
@@ -337,6 +340,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a07d194111656fc4a9b1ee7d919de27c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &298139936900606323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3102381213145884058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb6c7261d7f758c479b99857a11fe72d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 228322013234056663}
 --- !u!54 &8138357687039772532
 Rigidbody:
   m_ObjectHideFlags: 0
