@@ -198,7 +198,7 @@ public class Client
     {
         foreach (Client _client in Server.clients.Values)
         {
-            if (_client.tcp.socket != null)
+            if (_client.tcp.socket != null && _client.username != "Middleware")
             {
                 PacketSend.SendToLobby(_client.id, _client.username, _league); //Send new player entered in the lobby to all
             }

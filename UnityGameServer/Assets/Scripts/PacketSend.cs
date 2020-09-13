@@ -140,11 +140,14 @@ public class PacketSend
 
     public static void PlayerDisconnected(int _playerId)
     {
-        using (Packet _packet = new Packet((int)ServerPackets.playerDisconnected))
+        if (Server.clients[_playerId].username != "Middleware")
         {
-            _packet.Write(_playerId);
+            using (Packet _packet = new Packet((int)ServerPackets.playerDisconnected))
+            {
+                _packet.Write(_playerId);
 
-            SendTCPDataToAll(_packet);
+                SendTCPDataToAll(_packet);
+            }
         }
     }
 
