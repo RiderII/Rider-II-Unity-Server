@@ -43,7 +43,6 @@ public class PacketHandle
             Server.clients[_fromClient].username = _username;
             Debug.Log($"Rider II middleware sending data to player with id: {_clientIdCheck}");
         }
-
     }
 
     public static void SendReadyState(int _fromClient, Packet _packet)
