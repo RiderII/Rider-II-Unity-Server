@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class NetworkManager : MonoBehaviour //works like the program class
 {
@@ -9,14 +10,17 @@ public class NetworkManager : MonoBehaviour //works like the program class
     public bool verifyDisconnection = false;
 
     public GameObject playerPrefab;
+    public GameObject playerPrefabRigid;
     public GameObject gameManager;
     public GameObject gameManagerClone;
+    public string sceneName;
 
     public void Awake()
     {
         if (instance == null)
         {
             instance = this;
+            DontDestroyOnLoad(this.gameObject);
         }
         else if (instance != this)
         {
@@ -43,31 +47,32 @@ public class NetworkManager : MonoBehaviour //works like the program class
 
     private void FixedUpdate()
     {
-        if (verifyDisconnection)
+        if (sceneName == "Vaquita")
         {
-            destroyGameManager = true;
-
-            for (int i = 1; i <= Server.MaxPLayers; i++)
+            if (verifyDisconnection)
             {
-                if (Server.clients[i].tcp.socket != null)
+                destroyGameManager = true;
+
+                for (int i = 1; i <= Server.MaxPLayers; i++)
                 {
-                    destroyGameManager = false;
+                    if (Server.clients[i].tcp.socket != null)
+                    {
+                        destroyGameManager = false;
+                        verifyDisconnection = false;
+                        return;
+                    }
+                }
+
+                if (destroyGameManager)
+                {
+                    ThreadManager.ExecuteOnMainThread(() =>
+                    {
+                        Destroy(gameManagerClone.gameObject); //has to be destroyed in the main thread
+                    });
                     verifyDisconnection = false;
-                    return;
                 }
             }
-
-            if (destroyGameManager)
-            {
-                ThreadManager.ExecuteOnMainThread(() =>
-                {
-                    Destroy(gameManagerClone.gameObject); //has to be destroyed in the main thread
-                });
-                verifyDisconnection = false;
-            }
         }
-
-
     }
 
     private void OnApplicationQuit()
@@ -77,16 +82,29 @@ public class NetworkManager : MonoBehaviour //works like the program class
 
     public Player InstantiatePlayer()
     {
-        return Instantiate(playerPrefab, Vector3.zero, Quaternion.identity).GetComponent<Player>(); //returns a reference of the player
+        if (sceneName == "Vaquita")
+        {
+            return Instantiate(playerPrefab, Vector3.zero, Quaternion.identity).GetComponent<Player>(); //returns a reference of the player
+        }
+        else if (sceneName == "200 metros")
+        {
+            return Instantiate(playerPrefabRigid, new Vector3(-25.706f, 0.606f, -21.200f), Quaternion.Euler(-0.807f, 111.458f, 0.017f)).GetComponent<Player>(); //returns a reference of the player
+        }
+        else
+        {
+            return Instantiate(playerPrefabRigid, new Vector3(-20.5f, 0.5f, -28.2f), Quaternion.Euler(-0f, 116.09f, 0f)).GetComponent<Player>(); //returns a reference of the player
+        }
     }
 
     public GameManager StartGameManager()
     {
-        if (gameManagerClone == null)
+        if (sceneName == "Vaquita")
         {
-            gameManagerClone = Instantiate(gameManager).GetComponent<GameManager>().gameObject;
+            if (gameManagerClone == null)
+            {
+                gameManagerClone = Instantiate(gameManager).GetComponent<GameManager>().gameObject;
+            }
         }
-
         return null;
     }
 }

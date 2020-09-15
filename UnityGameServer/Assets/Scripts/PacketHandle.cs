@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PacketHandle
 {
@@ -9,10 +10,19 @@ public class PacketHandle
     {
         int _clientIdCheck = _packet.ReadInt();
         string _username = _packet.ReadString();
-        string _league = _packet.ReadString();
 
         if (_username != "Middleware")
         {
+            string _league = _packet.ReadString();
+            string _scene = _packet.ReadString();
+
+
+            if (NetworkManager.instance.sceneName == "")
+            {
+                NetworkManager.instance.sceneName = _scene;
+                SceneManager.LoadScene(_scene);
+            }
+
             Server.clients[_fromClient].username = _username; //we want to set the client name when logged in
                                                               // being logged in is implies connecting to the server automatically, but not necessarily into the game
                                                               // clients names will appear in a list within the invite options perhaps, so we want the names of the connected clients
@@ -33,7 +43,6 @@ public class PacketHandle
             Server.clients[_fromClient].username = _username;
             Debug.Log($"Rider II middleware sending data to player with id: {_clientIdCheck}");
         }
-
     }
 
     public static void SendReadyState(int _fromClient, Packet _packet)
@@ -67,6 +76,17 @@ public class PacketHandle
             int _toClient = _packet.ReadInt();
             Server.clients[_toClient].player.SetInput(_inputs);
         }
+    }
+
+    public static void RecievePlayerStatistics(int _fromCLient, Packet _packet)
+    {
+        int clientId = _packet.ReadInt();
+        float burned_calories = _packet.ReadFloat();
+        float traveled_meters = _packet.ReadFloat();
+        int points = _packet.ReadInt();
+        float finalTime = _packet.ReadFloat();
+        int placement = _packet.ReadInt();
+        PacketSend.SendPlayerStatisticsToAll(clientId, burned_calories, traveled_meters, points, finalTime, placement);
     }
 
     public static void RestartScene(int _fromClient, Packet _packet)

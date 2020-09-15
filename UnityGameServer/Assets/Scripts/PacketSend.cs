@@ -140,11 +140,14 @@ public class PacketSend
 
     public static void PlayerDisconnected(int _playerId)
     {
-        using (Packet _packet = new Packet((int)ServerPackets.playerDisconnected))
+        if (Server.clients[_playerId].username != "Middleware")
         {
-            _packet.Write(_playerId);
+            using (Packet _packet = new Packet((int)ServerPackets.playerDisconnected))
+            {
+                _packet.Write(_playerId);
 
-            SendTCPDataToAll(_packet);
+                SendTCPDataToAll(_packet);
+            }
         }
     }
 
@@ -161,6 +164,81 @@ public class PacketSend
         }
     }
 
+    public static void SpeedUp(int playerId, bool speedUp)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.speedUp))
+        {
+            _packet.Write(playerId);
+            _packet.Write(speedUp);
+            SendTCPDataToAll(_packet);
+        }
+    }
+
+    public static void UpdatePlayerSteps(int playerId, int steps)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.updatePlayerSteps))
+        {
+            _packet.Write(playerId);
+            _packet.Write(steps);
+            SendTCPDataToAll(_packet);
+        }
+    }
+
+    public static void UpdatePlayerPoints(Player player)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.updatePlayerPoints))
+        {
+            _packet.Write(player.id);
+            _packet.Write(player.points);
+            SendTCPDataToAll(_packet);
+        }
+    }
+
+    public static void SendPlayerStatisticsToAll(int playerId, float burned_calories, float traveled_meters, int points, float finalTime, int placement)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.sendPlayerStatisticsToAll))
+        {
+            _packet.Write(playerId);
+            _packet.Write(burned_calories);
+            _packet.Write(traveled_meters);
+            _packet.Write(points);
+            _packet.Write(finalTime);
+            _packet.Write(placement);
+            SendTCPDataToAll(_packet);
+        }
+    }
+
+    public static void PlayerCollidedWithOtherPlayer(float _speed, bool _collision)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.playerCollidedWithOtherPlayer))
+        {
+            _packet.Write(_speed);
+            _packet.Write(_collision);
+            SendTCPDataToAll(_packet);
+        }
+    }
+
+    public static void ElementCollision(string _elementTag, Player _player, ElementCollision _element)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.elementCollision))
+        {
+            _packet.Write(_player.id);
+            _packet.Write(_elementTag);
+            _packet.Write(_player.collisions);
+            //get players position for other players to listen to a cow muuu depending on the distance
+            if (NetworkManager.instance.sceneName == "Vaquita")
+            {
+                _packet.Write(_player.controller.transform.position);
+            }
+            else
+            {
+                _packet.Write(_player.transform.position);
+                _packet.Write(_element.transform.position);
+            }
+            SendTCPDataToAll(_packet);
+        }
+    }
+
     public static void ObstacleSpawned(Vector3 _position)
     {
         using (Packet _packet = new Packet((int)ServerPackets.obstacleSpawned))
@@ -171,12 +249,12 @@ public class PacketSend
         }
     }
 
-    public static void PlayerFinishedGame(int _playerId)
+    public static void PlayerFinishedGame(int _playerId, float _speed)
     {
         using (Packet _packet = new Packet((int)ServerPackets.playerFinishedGame))
         {
             _packet.Write(_playerId);
-
+            _packet.Write(_speed);
             SendTCPDataToAll(_packet);
         }
     }

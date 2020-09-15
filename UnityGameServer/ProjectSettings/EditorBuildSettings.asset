@@ -6,6 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Game.unity
+    path: Assets/Scenes/Start.unity
+    guid: 2488cf162e463d24ea820e373d86596c
+  - enabled: 1
+    path: Assets/Scenes/Vaquita.unity
     guid: 1f093938d12327146b423e6acfa326d2
+  - enabled: 1
+    path: Assets/Scenes/200 metros.unity
+    guid: 3f789c3adde1b344088a752707caf467
+  - enabled: 1
+    path: Assets/Scenes/500 metros.unity
+    guid: 84246667b1099664bbf038f5a8276060
   m_configObjects: {}
