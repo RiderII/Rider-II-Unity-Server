@@ -3,6 +3,150 @@ guid: 4644904f53a83b047bf5e82799719a8e
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
+    100000: Armature_sepeda
+    100002: as_sepeda
+    100004: badan_sepeda
+    100006: ban_sepeda_depan
+    100008: base_pedal_kanan
+    100010: base_pedal_kiri
+    100012: base_sepeda
+    100014: base_sepeda_end
+    100016: BezierCircle
+    100018: Bone.002
+    100020: Bone.003
+    100022: Bone.006
+    100024: Bone.007
+    100026: Bone.015
+    100028: Bone.016
+    100030: Camera
+    100032: Cylinder_Cylinder.001
+    100034: gear_belakang
+    100036: gear_belakang 1
+    100038: gear_belakang_end
+    100040: gear_depan
+    100042: gear_depan 1
+    100044: lamp
+    100046: lantai
+    100048: pedal_kanan
+    100050: pedal_kanan 1
+    100052: pedal_kanan_end
+    100054: pedal_kiri
+    100056: pedal_kiri 1
+    100058: pedal_kiri_end
+    100060: rangka_sepeda
+    100062: rantai
+    100064: rantai 1
+    100066: rantai_end
+    100068: roda_depan
+    100070: roda_depan_end
+    100072: root
+    100074: //RootNode
+    100076: stank
+    400000: Armature_sepeda
+    400002: as_sepeda
+    400004: badan_sepeda
+    400006: ban_sepeda_depan
+    400008: base_pedal_kanan
+    400010: base_pedal_kiri
+    400012: base_sepeda
+    400014: base_sepeda_end
+    400016: BezierCircle
+    400018: Bone.002
+    400020: Bone.003
+    400022: Bone.006
+    400024: Bone.007
+    400026: Bone.015
+    400028: Bone.016
+    400030: Camera
+    400032: Cylinder_Cylinder.001
+    400034: gear_belakang
+    400036: gear_belakang 1
+    400038: gear_belakang_end
+    400040: gear_depan
+    400042: gear_depan 1
+    400044: lamp
+    400046: lantai
+    400048: pedal_kanan
+    400050: pedal_kanan 1
+    400052: pedal_kanan_end
+    400054: pedal_kiri
+    400056: pedal_kiri 1
+    400058: pedal_kiri_end
+    400060: rangka_sepeda
+    400062: rantai
+    400064: rantai 1
+    400066: rantai_end
+    400068: roda_depan
+    400070: roda_depan_end
+    400072: root
+    400074: //RootNode
+    400076: stank
+    2000000: Camera
+    2100000: Material
+    2100002: col_lantai
+    2100004: gear.001
+    2100006: steel_whiter.001
+    2100008: guma.001
+    2100010: skp_front_defaul.001
+    2100012: uv_pelek_kanan
+    2100014: col_ban
+    2100016: uv_pelek_kiri
+    2100018: col_pelek
+    2100020: uv_ban_kiri
+    2100022: uv_ban_kanan
+    2100024: col_jari2
+    2100026: No Name
+    2100028: dominan.001
+    2100030: ban_luar.001
+    2100032: Material.002
+    2100034: col_rangka_wadah_perr
+    2100036: col_master_btl
+    2100038: col_uv_btl
+    2100040: Material.003
+    2100042: Material.007
+    2100044: Material.006
+    2100046: Material.005
+    2100048: Material.004
+    2100050: None
+    2100052: col_casing_hp
+    2100054: uv_hp
+    2100056: col_pegangan_stank
+    2100058: col_rangka_per_sepeda
+    2300000: ban_sepeda_depan
+    2300002: BezierCircle
+    2300004: Cylinder_Cylinder.001
+    2300006: gear_belakang 1
+    2300008: gear_depan 1
+    2300010: lamp
+    2300012: lantai
+    2300014: pedal_kanan 1
+    2300016: pedal_kiri 1
+    2300018: rangka_sepeda
+    2300020: rantai 1
+    3300000: ban_sepeda_depan
+    3300002: BezierCircle
+    3300004: Cylinder_Cylinder.001
+    3300006: gear_belakang 1
+    3300008: gear_depan 1
+    3300010: lamp
+    3300012: lantai
+    3300014: pedal_kanan 1
+    3300016: pedal_kiri 1
+    3300018: rangka_sepeda
+    3300020: rantai 1
+    4300000: lamp
+    4300002: lantai
+    4300004: gear_belakang
+    4300006: rantai
+    4300008: gear_depan
+    4300010: pedal_kiri
+    4300012: pedal_kanan
+    4300014: rangka_sepeda
+    4300016: BezierCircle
+    4300018: Cylinder_Cylinder.001
+    4300020: ban_sepeda_depan
+    7400000: Armature_sepeda|jalan
+    9500000: //RootNode
     2186277476908879412: ImportLogs
   externalObjects: {}
   materials:
@@ -57,7 +201,7 @@ ModelImporter:
     secondaryUVPackMargin: 4
     useFileScale: 1
     previousCalculatedGlobalScale: 1
-    hasPreviousCalculatedGlobalScale: 0
+    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
