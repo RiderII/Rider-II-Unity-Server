@@ -41,7 +41,9 @@ public class PacketHandle
         else
         {
             Server.clients[_fromClient].username = _username;
+            Server.clients[_clientIdCheck].hasMiddleware = true;
             Debug.Log($"Rider II middleware sending data to player with id: {_clientIdCheck}");
+            PacketSend.AssignMiddlewareToUser(_clientIdCheck);
         }
     }
 
@@ -56,6 +58,19 @@ public class PacketHandle
         int clientId = _packet.ReadInt();
         string _username = _packet.ReadString();
         Server.clients[clientId].SendIntoGame(_username);
+    }
+
+    public static void StartMiddleware(int _fromClient, Packet _packet)
+    {
+        int clientId = _packet.ReadInt();
+
+        foreach (Client _client in Server.clients.Values) // Recibo la posicion de los jugadores ya conectados
+        {
+            if (_client.username == "Middleware")
+            {
+               PacketSend.StartMiddleware(_client.id);
+            }
+        }
     }
 
     public static void PlayerMovement(int _fromClient, Packet _packet)

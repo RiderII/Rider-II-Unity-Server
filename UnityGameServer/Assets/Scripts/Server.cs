@@ -128,6 +128,7 @@ public class Server
             { (int)ClientPackets.playerMovement, PacketHandle.PlayerMovement },
             { (int)ClientPackets.restartScene, PacketHandle.RestartScene },
             { (int)ClientPackets.sendPlayerStatistics, PacketHandle.RecievePlayerStatistics },
+            { (int)ClientPackets.startMiddleware, PacketHandle.StartMiddleware },
         };
         Debug.Log("Packets initialized");
     }

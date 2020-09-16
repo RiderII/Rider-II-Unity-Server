@@ -71,6 +71,26 @@ public class PacketSend
         }
     }
 
+    public static void AssignMiddlewareToUser(int _toClient)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.assignMiddlewareToUser))
+        {
+            _packet.Write(_toClient);
+
+            SendTCPData(_toClient, _packet);
+        }
+    }
+
+    public static void StartMiddleware(int _toClient)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.startMiddleware))
+        {
+            _packet.Write(_toClient);
+
+            SendTCPData(_toClient, _packet);
+        }
+    }
+
     public static void SendToLobby(int _clientId, string _playerName, string _league)
     {
         using (Packet _packet = new Packet((int)ServerPackets.sendToLobby))

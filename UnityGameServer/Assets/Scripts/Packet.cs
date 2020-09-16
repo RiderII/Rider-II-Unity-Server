@@ -23,7 +23,9 @@ public enum ServerPackets
     speedUp,
     sendPlayerStatisticsToAll,
     updatePlayerSteps,
-    updatePlayerPoints
+    updatePlayerPoints,
+    assignMiddlewareToUser,
+    startMiddleware,
 }
 
 /// <summary>Sent from client to server.</summary> 
@@ -34,7 +36,8 @@ public enum ClientPackets
     sendToGame,
     playerMovement,
     restartScene,
-    sendPlayerStatistics
+    sendPlayerStatistics,
+    startMiddleware
 }
 
 public class Packet : IDisposable

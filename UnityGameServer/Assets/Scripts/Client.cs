@@ -11,6 +11,7 @@ public class Client
     public string username;
     public string lobbyState = "Pendiente";
     public Player player;
+    public bool hasMiddleware = false;
     public TCP tcp; // reference to its tcp class
     public UDP udp;
 
