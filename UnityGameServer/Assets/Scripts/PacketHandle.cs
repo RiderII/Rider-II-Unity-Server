@@ -84,12 +84,12 @@ public class PacketHandle
         if (Server.clients[_fromClient].username != "Middleware")
         {
             Quaternion _rotation = _packet.readQuaternion();
-            Server.clients[_fromClient].player.SetInput(_inputs, _rotation);
+            Server.clients[_fromClient].player.SetInput(_fromClient, _inputs, _rotation);
         }
         else
         {
             int _toClient = _packet.ReadInt();
-            Server.clients[_toClient].player.SetInput(_inputs);
+            Server.clients[_toClient].player.SetInput(_fromClient, _inputs, null, true);
         }
     }
 

@@ -27,6 +27,8 @@ public class Player : MonoBehaviour
     public bool reachedFinishLine = false;
 
     private float distanceTimer;
+    private float nextUpdate = 1f;
+    private bool sent_from_middleware = false;
 
     public void Initialize(int _id, string _username, float positionx, Player player)
     {
@@ -45,11 +47,25 @@ public class Player : MonoBehaviour
         
 
         inputs = new bool[4];
+        Time.timeScale = 1;
     }
 
     public void FixedUpdate() //in the server console application this wass called every tick, now it's called every frame
     {
         distanceTimer += Time.deltaTime;
+
+        if (Server.clients[id].hasMiddleware && Time.time >= nextUpdate)
+        {
+            nextUpdate = Mathf.FloorToInt(Time.time) + 0.7f;
+            if (acceleration > 0)
+            {
+                acceleration -= 0.3f;
+            }
+            if (acceleration <= 0)
+            {
+                acceleration = 0;
+            }
+        }
 
         if ((currentSceneName == "Vaquita" && controller && controller.enabled) ||
             (currentSceneName != "Vaquita" && player))
@@ -86,7 +102,15 @@ public class Player : MonoBehaviour
                 }
             }
 
-            speed += acceleration * Time.fixedDeltaTime;
+            if (Server.clients[id].hasMiddleware)
+            {
+                speed = acceleration * Time.fixedDeltaTime;
+            }
+
+            else
+            {
+                speed += acceleration * Time.fixedDeltaTime;
+            }
 
             if (speed > maximunSpeed && !surpassSpeed)
             {
@@ -98,35 +122,24 @@ public class Player : MonoBehaviour
                 speed = 0;
             }
 
-            if (acceleration < 0)
-            {
-                if (currentSceneName == "Vaquita")
-                {
-                    controller.Move(direction.normalized * speed * Time.fixedDeltaTime);
-                }
-                else
-                {
-                    player.transform.Translate(speed * Time.deltaTime, 0f, 0f);
-                }   
-            }
-
-
-            if (inputs[0] && !reachedFinishLine)
+            if (!Server.clients[id].hasMiddleware && inputs[0] && !reachedFinishLine)
             {
                 if (acceleration < 0)
                 {
                     acceleration *= -1;
                 }
-                if (currentSceneName == "Vaquita")
-                {
-                    controller.Move(direction.normalized * speed * Time.fixedDeltaTime);
-                }
-                else
-                {
-                    player.transform.Translate(speed * Time.deltaTime, 0f, 0f);
-                }
             }
-            if (!inputs[0] && !reachedFinishLine)
+
+            if (currentSceneName == "Vaquita")
+            {
+                controller.Move(direction.normalized * speed * Time.fixedDeltaTime);
+            }
+            else
+            {
+                player.transform.Translate(speed * Time.deltaTime, 0f, 0f);
+            }
+
+            if (!Server.clients[id].hasMiddleware && !inputs[0] && !reachedFinishLine)
             {
                 if (acceleration > 0)
                 {
@@ -134,7 +147,7 @@ public class Player : MonoBehaviour
                 }
             }
 
-            if (reachedFinishLine && acceleration > 0)
+            if (!Server.clients[id].hasMiddleware && reachedFinishLine && acceleration > 0)
             {
                 if (speed > 7)
                 {
@@ -169,8 +182,10 @@ public class Player : MonoBehaviour
                 }
             }
 
-            PacketSend.PlayerPosition(this);
-            PacketSend.PlayerRotation(this); //client is authorative in rotation
+            //if (sent_from_middleware) {
+                PacketSend.PlayerPosition(this);
+                PacketSend.PlayerRotation(this); //client is authorative in rotation
+            //}
         }
     }
 
@@ -183,9 +198,20 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void SetInput(bool[] _inputs, Quaternion? _rotation = null)
+    public void SetInput(int _fromClient, bool[] _inputs, Quaternion? _rotation = null, bool? middleware = false)
     {
-        inputs = _inputs;
+        if (middleware != null) sent_from_middleware = (bool)middleware;
+        if (Server.clients[_fromClient].hasMiddleware == false)
+        {
+            if (Server.clients[_fromClient].username == "Middleware")
+            {
+                if (!reachedFinishLine)
+                {
+                    acceleration += 0.6f;
+                }
+            }
+            inputs = _inputs;
+        }
         if (_rotation != null) transform.rotation = (Quaternion)_rotation;
     }
 

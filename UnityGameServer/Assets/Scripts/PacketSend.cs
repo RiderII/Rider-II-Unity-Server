@@ -204,6 +204,16 @@ public class PacketSend
         }
     }
 
+    public static void UpdatePlayerLaps(int playerId, int laps)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.updatePlayerLaps))
+        {
+            _packet.Write(playerId);
+            _packet.Write(laps);
+            SendTCPData(playerId, _packet);
+        }
+    }
+
     public static void UpdatePlayerPoints(Player player)
     {
         using (Packet _packet = new Packet((int)ServerPackets.updatePlayerPoints))

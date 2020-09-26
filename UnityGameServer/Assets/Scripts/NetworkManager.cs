@@ -36,7 +36,6 @@ public class NetworkManager : MonoBehaviour //works like the program class
         Application.targetFrameRate = 30; //server is pumping frames very fast, but the actual logic is ticking 30 ticks per second
 
         // Unity editor doesn't shutdown sockets when exiting playmode until you enter playmode again, which means
-        // that the port you use will be taken until you enter playmode a second time
         //Server.Start(50, 26950);
         //#if UNITY_EDITOR
         //Debug.Log("Build the project to start the server!");

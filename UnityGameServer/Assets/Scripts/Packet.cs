@@ -23,6 +23,7 @@ public enum ServerPackets
     speedUp,
     sendPlayerStatisticsToAll,
     updatePlayerSteps,
+    updatePlayerLaps,
     updatePlayerPoints,
     assignMiddlewareToUser,
     startMiddleware,
