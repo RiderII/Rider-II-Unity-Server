@@ -182,10 +182,11 @@ public class Player : MonoBehaviour
                 }
             }
 
-            //if (sent_from_middleware) {
+            if (sent_from_middleware)
+            {
                 PacketSend.PlayerPosition(this);
                 PacketSend.PlayerRotation(this); //client is authorative in rotation
-            //}
+            }
         }
     }
 
