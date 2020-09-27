@@ -154,7 +154,23 @@ public class PacketSend
             _packet.Write(_player.id);
             _packet.Write(_player.transform.rotation);
 
-            SendUDPDataToAll(_player.id, _packet);
+            if (Server.clients[_player.id].hasMiddleware)
+            {
+                SendUDPDataToAll(_packet);
+            }
+            else
+            {
+                SendUDPDataToAll(_player.id, _packet);
+            }
+        }
+    }
+    public static void PlayerHandleRotation(int playerId, Quaternion _rotation)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.playerHandleRotation))
+        {
+            //Debug.Log(_rotation);
+            _packet.Write(_rotation);
+            SendUDPData(playerId, _packet);
         }
     }
 

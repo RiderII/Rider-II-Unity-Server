@@ -54,19 +54,6 @@ public class Player : MonoBehaviour
     {
         distanceTimer += Time.deltaTime;
 
-        if (Server.clients[id].hasMiddleware && Time.time >= nextUpdate)
-        {
-            nextUpdate = Mathf.FloorToInt(Time.time) + 0.7f;
-            if (acceleration > 0)
-            {
-                acceleration -= 0.3f;
-            }
-            if (acceleration <= 0)
-            {
-                acceleration = 0;
-            }
-        }
-
         if ((currentSceneName == "Vaquita" && controller && controller.enabled) ||
             (currentSceneName != "Vaquita" && player))
         {
@@ -102,12 +89,7 @@ public class Player : MonoBehaviour
                 }
             }
 
-            if (Server.clients[id].hasMiddleware)
-            {
-                speed = acceleration * Time.fixedDeltaTime;
-            }
-
-            else
+            if (!Server.clients[id].hasMiddleware)
             {
                 speed += acceleration * Time.fixedDeltaTime;
             }
@@ -182,11 +164,11 @@ public class Player : MonoBehaviour
                 }
             }
 
-            if (sent_from_middleware)
-            {
-                PacketSend.PlayerPosition(this);
-                PacketSend.PlayerRotation(this); //client is authorative in rotation
-            }
+            //if (sent_from_middleware)
+            //{
+            PacketSend.PlayerPosition(this);
+            PacketSend.PlayerRotation(this); //client is authorative in rotation
+            //}
         }
     }
 
@@ -199,21 +181,31 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void SetInput(int _fromClient, bool[] _inputs, Quaternion? _rotation = null, bool? middleware = false)
+    public void SetInput(int _fromClient, bool[] _inputs, Quaternion? _rotation = null)
     {
-        if (middleware != null) sent_from_middleware = (bool)middleware;
-        if (Server.clients[_fromClient].hasMiddleware == false)
-        {
-            if (Server.clients[_fromClient].username == "Middleware")
-            {
-                if (!reachedFinishLine)
-                {
-                    acceleration += 0.6f;
-                }
-            }
-            inputs = _inputs;
-        }
+        //if (middleware != null) sent_from_middleware = (bool)middleware;
+        //if (Server.clients[_fromClient].hasMiddleware == false)
+        //{
+        //    if (Server.clients[_fromClient].username == "Middleware")
+        //    {
+        //        if (!reachedFinishLine)
+        //        {
+        //            acceleration += 0.2f;
+        //        }
+        //    }
+        inputs = _inputs;
+        //}
         if (_rotation != null) transform.rotation = (Quaternion)_rotation;
+    }
+
+    public void SetSpeed(float _metersPerSecond)
+    {
+        speed = _metersPerSecond * Time.fixedDeltaTime;
+    }
+
+    public void SetRotation(Quaternion _rotation)
+    {
+        transform.rotation = _rotation;
     }
 
     private void CalculatePoints(int stepsPassed)

@@ -27,6 +27,7 @@ public enum ServerPackets
     updatePlayerPoints,
     assignMiddlewareToUser,
     startMiddleware,
+    playerHandleRotation
 }
 
 /// <summary>Sent from client to server.</summary> 

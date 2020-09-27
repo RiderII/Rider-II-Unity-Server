@@ -11,7 +11,7 @@ public class PacketHandle
         int _clientIdCheck = _packet.ReadInt();
         string _username = _packet.ReadString();
 
-        if (_username != "Middleware")
+        if (_username != "Middleware" && _username != "Handle Middleware")
         {
             string _league = _packet.ReadString();
             string _scene = _packet.ReadString();
@@ -42,7 +42,7 @@ public class PacketHandle
         {
             Server.clients[_fromClient].username = _username;
             Server.clients[_clientIdCheck].hasMiddleware = true;
-            Debug.Log($"Rider II middleware sending data to player with id: {_clientIdCheck}");
+            Debug.Log($"Rider II {_username} sending data to player with id: {_clientIdCheck}");
             PacketSend.AssignMiddlewareToUser(_clientIdCheck);
         }
     }
@@ -66,7 +66,7 @@ public class PacketHandle
 
         foreach (Client _client in Server.clients.Values) // Recibo la posicion de los jugadores ya conectados
         {
-            if (_client.username == "Middleware")
+            if (_client.username == "Middleware" || _client.username == "Handle Middleware")
             {
                PacketSend.StartMiddleware(_client.id);
             }
@@ -75,21 +75,32 @@ public class PacketHandle
 
     public static void PlayerMovement(int _fromClient, Packet _packet)
     {
-        bool[] _inputs = new bool[_packet.ReadInt()];
-        for (int i = 0; i < _inputs.Length; i++)
+        bool[] _inputs = new bool[4];
+        if ((Server.clients[_fromClient].username != "Handle Middleware" && Server.clients[_fromClient].username != "Middleware" &&
+            !Server.clients[_fromClient].hasMiddleware))
         {
-            _inputs[i] = _packet.ReadBool();
-        }
+            _inputs = new bool[_packet.ReadInt()];
+            for (int i = 0; i < _inputs.Length; i++)
+            {
+                _inputs[i] = _packet.ReadBool();
+            }
 
-        if (Server.clients[_fromClient].username != "Middleware")
-        {
             Quaternion _rotation = _packet.readQuaternion();
             Server.clients[_fromClient].player.SetInput(_fromClient, _inputs, _rotation);
         }
-        else
+        
+        if (Server.clients[_fromClient].username == "Middleware")
         {
+            float _metersPerSecond = _packet.ReadFloat();
             int _toClient = _packet.ReadInt();
-            Server.clients[_toClient].player.SetInput(_fromClient, _inputs, null, true);
+            Server.clients[_toClient].player.SetSpeed(_metersPerSecond);
+        }
+        else if (Server.clients[_fromClient].username == "Handle Middleware")
+        {
+            Quaternion _rotation = _packet.readQuaternion();
+            int _toClient = _packet.ReadInt();
+            Server.clients[_toClient].player.SetRotation(_rotation);
+            //PacketSend.PlayerHandleRotation(_toClient, _rotation);
         }
     }
 
