@@ -226,7 +226,7 @@ public class PacketSend
         {
             _packet.Write(playerId);
             _packet.Write(laps);
-            SendTCPData(playerId, _packet);
+            SendTCPDataToAll(_packet);
         }
     }
 
