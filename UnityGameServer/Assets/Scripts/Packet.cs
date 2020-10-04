@@ -27,7 +27,11 @@ public enum ServerPackets
     updatePlayerPoints,
     assignMiddlewareToUser,
     startMiddleware,
-    playerHandleRotation
+    playerHandleRotation,
+    activatePointingArrowAndSendMessage,
+    showAlertWithMessage,
+    deletePointingArrow,
+    activateAlert
 }
 
 /// <summary>Sent from client to server.</summary> 

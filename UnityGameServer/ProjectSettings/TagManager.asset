@@ -6,6 +6,11 @@ TagManager:
   tags:
   - Obstacle
   - PlayerBoxCollider
+  - FinishLine
+  - RampUp
+  - RampDown
+  - Cone
+  - NotRoad
   layers:
   - Default
   - TransparentFX

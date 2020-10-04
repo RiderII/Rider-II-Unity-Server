@@ -15,6 +15,9 @@ public class Player : MonoBehaviour
     public float burned_calories = 0;
     public List<string> steps = new List<string>();
     private int previouSteps = 0;
+    public GameObject lastGlassRef;
+    public GameObject ptArrow;
+    public bool arrowActive = false;
 
     private bool[] inputs;
     private float yVelocity = 0;

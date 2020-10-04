@@ -305,5 +305,47 @@ public class PacketSend
         }
     }
 
+    public static void ActivatePoitingArrowAndSendMessage(int _playerId, Vector3 lastGlassPosition, Quaternion lastGlassQuaternion, string message)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.activatePointingArrowAndSendMessage))
+        {
+            _packet.Write(_playerId);
+            _packet.Write(lastGlassPosition);
+            _packet.Write(lastGlassQuaternion);
+            _packet.Write(message);
+            SendTCPData(_playerId, _packet);
+        }
+    }
+
+    public static void ShowAlertWithMessage(int _playerId, string message, bool state)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.showAlertWithMessage))
+        {
+            _packet.Write(_playerId);
+            _packet.Write(message);
+            _packet.Write(state);
+            SendTCPData(_playerId, _packet);
+        }
+    }
+
+    public static void DeleteArrow(int _playerId)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.deletePointingArrow))
+        {
+            _packet.Write(_playerId);
+            SendTCPData(_playerId, _packet);
+        }
+    }
+
+    public static void ActivateAlert(int _playerId, bool state)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.activateAlert))
+        {
+            _packet.Write(_playerId);
+            _packet.Write(state);
+            SendTCPData(_playerId, _packet);
+        }
+    }
+
     #endregion
 }

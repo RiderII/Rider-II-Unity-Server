@@ -25,6 +25,28 @@ public class FinishedLine : MonoBehaviour
     {
         if (other.CompareTag("FinishLine"))
         {
+
+            if (player.steps.Contains(other.name))
+            {
+                EraseArrou(other);
+                if (int.Parse(player.lastGlassRef.name) > int.Parse(other.name))
+                {
+                    player.lastGlassRef = other.gameObject;
+                    PacketSend.ActivateAlert(player.id, true);
+                }
+                else
+                {
+                    player.lastGlassRef = other.gameObject;
+                    PacketSend.ActivateAlert(player.id, false);
+                }
+            }
+            if (!player.steps.Contains(other.name))
+            {
+                EraseArrou(other);
+                player.lastGlassRef = other.gameObject;
+                PacketSend.ActivateAlert(player.id, false);
+            }
+
             if (!player.steps.Contains(other.name) && (player.steps.Count + 1).ToString() == other.name)
             {
                 player.steps.Add(other.name);
@@ -64,6 +86,20 @@ public class FinishedLine : MonoBehaviour
                     player.steps.Clear();
                 }
             }
+        }
+    }
+
+    private void EraseArrou(Collider other)
+    {
+        if (player.ptArrow && player.ptArrow.transform.position.x == other.gameObject.transform.position.x &&
+                    player.ptArrow.transform.position.z == other.gameObject.transform.position.z)
+        {
+            player.arrowActive = false;
+            PacketSend.DeleteArrow(player.id);
+            ThreadManager.ExecuteOnMainThread(() =>
+            {
+                Destroy(player.ptArrow);
+            });
         }
     }
 }

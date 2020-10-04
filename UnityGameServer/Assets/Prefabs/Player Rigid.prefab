@@ -217,6 +217,7 @@ GameObject:
   - component: {fileID: 7953726514303991439}
   - component: {fileID: 228322013234056663}
   - component: {fileID: 8380149905121003819}
+  - component: {fileID: 6299354455897122433}
   - component: {fileID: 298139936900606323}
   - component: {fileID: 8138357687039772532}
   m_Layer: 0
@@ -322,6 +323,9 @@ MonoBehaviour:
   traveled_kilometers: 0
   burned_calories: 0
   steps: []
+  lastGlassRef: {fileID: 0}
+  ptArrow: {fileID: 0}
+  arrowActive: 0
   acceleration: 0.6
   maximunSpeed: 9
   obstacleSlowDown: 0.25
@@ -340,6 +344,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a07d194111656fc4a9b1ee7d919de27c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6299354455897122433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3102381213145884058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 567c246a3ac55e148a6463689ffbc718, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 228322013234056663}
+  pointingArrow: {fileID: 5469209958046762407, guid: b8fa6a49a6777a14baebca8cda0feb1a,
+    type: 3}
 --- !u!114 &298139936900606323
 MonoBehaviour:
   m_ObjectHideFlags: 0
