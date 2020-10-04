@@ -203,7 +203,7 @@ public class Player : MonoBehaviour
 
     public void SetSpeed(float _metersPerSecond)
     {
-        speed = _metersPerSecond * Time.fixedDeltaTime;
+        speed = _metersPerSecond;
     }
 
     public void SetRotation(Quaternion _rotation)
