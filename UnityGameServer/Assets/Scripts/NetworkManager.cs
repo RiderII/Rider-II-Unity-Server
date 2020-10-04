@@ -91,7 +91,7 @@ public class NetworkManager : MonoBehaviour //works like the program class
         }
         else
         {
-            return Instantiate(playerPrefabRigid, new Vector3(-20.5f, 0.5f, -28.2f), Quaternion.Euler(-0f, 116.09f, 0f)).GetComponent<Player>(); //returns a reference of the player
+            return Instantiate(playerPrefabRigid, new Vector3(-21.5f, 0.5f, -28.2f), Quaternion.Euler(-0f, 116.09f, 0f)).GetComponent<Player>(); //returns a reference of the player
         }
     }
 
