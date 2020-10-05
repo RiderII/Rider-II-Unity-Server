@@ -18,6 +18,8 @@ public class Player : MonoBehaviour
     public GameObject lastGlassRef;
     public GameObject ptArrow;
     public bool arrowActive = false;
+    Vector3 initialPos;
+    Vector3 previousPos;
 
     private bool[] inputs;
     private float yVelocity = 0;
@@ -53,6 +55,12 @@ public class Player : MonoBehaviour
         Time.timeScale = 1;
     }
 
+    private void Start()
+    {
+        previousPos = transform.position;
+        initialPos = transform.position;
+    }
+
     public void FixedUpdate() //in the server console application this wass called every tick, now it's called every frame
     {
         distanceTimer += Time.deltaTime;
@@ -79,6 +87,26 @@ public class Player : MonoBehaviour
             if (currentSceneName == "Vaquita")
             {
                 direction = new Vector3(controller.transform.forward.x, 0, controller.transform.forward.z);
+
+                if (transform.position.z - previousPos.z > 0f)
+                {
+                    PacketSend.ActivateAlert(id, false);
+                    float distancePoints = (transform.position.z - initialPos.z);
+                    previousPos = transform.position;
+                    if (distancePoints >= 30f)
+                    {
+                        CalculatePointsVaquita(distanceTimer);
+                        PacketSend.UpdatePlayerPoints(this);
+                        distanceTimer = 0f;
+                        initialPos = transform.position;
+                    }
+                }
+
+                if (transform.position.z - previousPos.z < 0f)
+                {
+                    PacketSend.ActivateAlert(id, true);
+                    previousPos = transform.position;
+                }
             }
             else
             {
@@ -219,6 +247,17 @@ public class Player : MonoBehaviour
             case var _ when stepsPassed >= 10: points += 200; break;
             case var _ when stepsPassed >= 8: points += 150; break;
             case var _ when stepsPassed >= 6: points += 100; break;
+        }
+    }
+
+    private void CalculatePointsVaquita(float distanceTimer)
+    {
+        switch (distanceTimer)
+        {
+            case var _ when distanceTimer <= 3: points += 250; break;
+            case var _ when distanceTimer <= 5: points += 200; break;
+            case var _ when distanceTimer <= 7: points += 150; break;
+            case var _ when distanceTimer <= 10: points += 100; break;
         }
     }
 }

@@ -9,6 +9,7 @@ public class FinishGame : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Player player = other.GetComponent<Player>();
+            player.reachedFinishLine = true;
             PacketSend.PlayerFinishedGame(player.id, player.speed);
             GameManager.spawnDistanceFromPlayer = 20f;
             GameManager.newObstacleSpawnedTime = 5f;
