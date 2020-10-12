@@ -68,7 +68,7 @@ public class PacketHandle
         {
             if (_client.username == "Middleware" || _client.username == "Handle Middleware")
             {
-               PacketSend.StartMiddleware(_client.id);
+                PacketSend.StartMiddleware(_client.id);
             }
         }
     }
@@ -88,7 +88,7 @@ public class PacketHandle
             Quaternion _rotation = _packet.readQuaternion();
             Server.clients[_fromClient].player.SetInput(_fromClient, _inputs, _rotation);
         }
-        
+
         if (Server.clients[_fromClient].username == "Middleware")
         {
             float _metersPerSecond = _packet.ReadFloat();

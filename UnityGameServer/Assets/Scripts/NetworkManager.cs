@@ -89,6 +89,10 @@ public class NetworkManager : MonoBehaviour //works like the program class
         {
             return Instantiate(playerPrefabRigid, new Vector3(-25.706f, 0.606f, -21.200f), Quaternion.Euler(-0.807f, 111.458f, 0.017f)).GetComponent<Player>(); //returns a reference of the player
         }
+        else if (sceneName == "4.6 kilometros")
+        {
+            return Instantiate(playerPrefabRigid, new Vector3(-458.7f, -0.55f, -473.4f), Quaternion.Euler(0f, -1.8f, 0f)).GetComponent<Player>();
+        }
         else
         {
             return Instantiate(playerPrefabRigid, new Vector3(-21.5f, 0.5f, -28.2f), Quaternion.Euler(-0f, 116.09f, 0f)).GetComponent<Player>(); //returns a reference of the player

@@ -11,7 +11,7 @@ public class FinishedLine : MonoBehaviour
 
     private void Awake()
     {
-        if (SceneManager.GetActiveScene().name != "4.6 kilómetros")
+        if (SceneManager.GetActiveScene().name != "4.6 kilometros")
         {
             switch (NetworkManager.instance.sceneName)
             {
@@ -57,7 +57,7 @@ public class FinishedLine : MonoBehaviour
                 if (other.name == "86")
                 {
                     lapsDone++;
-                    if (SceneManager.GetActiveScene().name != "4.6 kilómetros")
+                    if (SceneManager.GetActiveScene().name != "4.6 kilometros")
                     {
                         PacketSend.UpdatePlayerLaps(player.id, lapsDone + 1);
                     }
@@ -74,7 +74,7 @@ public class FinishedLine : MonoBehaviour
                 if (other.name == "146")
                 {
                     lapsDone++;
-                    if (SceneManager.GetActiveScene().name != "4.6 kilómetros")
+                    if (SceneManager.GetActiveScene().name != "4.6 kilometros")
                     {
                         PacketSend.UpdatePlayerLaps(player.id, lapsDone + 1);
                     }

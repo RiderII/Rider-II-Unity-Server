@@ -295,6 +295,31 @@ public class PacketSend
         }
     }
 
+    public static void ObstacleSpawned2(int gameObjectId, Vector3 _position, Quaternion _rotation, string obstacleType, int playerId)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.obstacleSpawned2))
+        {
+            _packet.Write(gameObjectId);
+            _packet.Write(_position);
+            _packet.Write(_rotation);
+            _packet.Write(obstacleType);
+
+            SendTCPData(playerId, _packet);
+        }
+    }
+
+    public static void ObstacleMovement(int gameObjectId, Vector3 _position, Quaternion _rotation)
+    {
+        using (Packet _packet = new Packet((int)ServerPackets.obstacleMovement))
+        {
+            _packet.Write(gameObjectId);
+            _packet.Write(_position);
+            _packet.Write(_rotation);
+
+            SendUDPDataToAll(_packet);
+        }
+    }
+
     public static void PlayerFinishedGame(int _playerId, float _speed)
     {
         using (Packet _packet = new Packet((int)ServerPackets.playerFinishedGame))

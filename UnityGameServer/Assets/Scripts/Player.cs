@@ -34,6 +34,7 @@ public class Player : MonoBehaviour
     private float distanceTimer;
     private float nextUpdate = 1f;
     private bool sent_from_middleware = false;
+    private bool spawnObstacles = true;
 
     public void Initialize(int _id, string _username, float positionx, Player player)
     {
@@ -195,10 +196,12 @@ public class Player : MonoBehaviour
                 }
             }
 
-            //if (sent_from_middleware)
-            //{
             PacketSend.PlayerPosition(this);
             PacketSend.PlayerRotation(this); //client is authorative in rotation
+            //if (spawnObstacles)
+            //{
+            //    ObstacleSpawner.instance.SpawnObstacles(id);
+            //    spawnObstacles = false;
             //}
         }
     }

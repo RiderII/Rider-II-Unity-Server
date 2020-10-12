@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/500 metros.unity
     guid: 84246667b1099664bbf038f5a8276060
+  - enabled: 1
+    path: Assets/Scenes/4.6 kilometros.unity
+    guid: 74ae682a513777a4a860b776fb01cfe8
   m_configObjects: {}
