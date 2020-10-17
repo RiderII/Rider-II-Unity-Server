@@ -240,7 +240,7 @@ public class PacketSend
         }
     }
 
-    public static void SendPlayerStatisticsToAll(int playerId, float burned_calories, float traveled_meters, int points, float finalTime, int placement)
+    public static void SendPlayerStatisticsToAll(int playerId, float burned_calories, float traveled_meters, int points, float finalTime, int placement, string finishGameTime)
     {
         using (Packet _packet = new Packet((int)ServerPackets.sendPlayerStatisticsToAll))
         {
@@ -250,6 +250,7 @@ public class PacketSend
             _packet.Write(points);
             _packet.Write(finalTime);
             _packet.Write(placement);
+            _packet.Write(finishGameTime);
             SendTCPDataToAll(_packet);
         }
     }

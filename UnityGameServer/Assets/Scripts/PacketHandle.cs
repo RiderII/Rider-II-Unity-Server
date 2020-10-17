@@ -112,7 +112,8 @@ public class PacketHandle
         int points = _packet.ReadInt();
         float finalTime = _packet.ReadFloat();
         int placement = _packet.ReadInt();
-        PacketSend.SendPlayerStatisticsToAll(clientId, burned_calories, traveled_meters, points, finalTime, placement);
+        string finishGameTime = _packet.ReadString();
+        PacketSend.SendPlayerStatisticsToAll(clientId, burned_calories, traveled_meters, points, finalTime, placement, finishGameTime);
     }
 
     public static void RestartScene(int _fromClient, Packet _packet)
